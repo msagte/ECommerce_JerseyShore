@@ -1,0 +1,135 @@
+<html>
+<head>
+  <title>Classic Shave - Sign up</title>
+  <style>
+      
+      form{
+         align: center;
+      }
+    
+.modal-content {
+  background-color: white;
+  margin: 5% auto 15% auto;  */
+  border: 1px solid #888;
+  width: 80%; 
+}
+
+
+.modal {
+  
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: #80bfff;
+  padding-top: 50px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.signupbtn {
+  float: left;
+  width: 100%;
+}
+button {
+  background-color: #1a8cff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+.s{   
+           
+  font-family: 'Brush Script MT', cursive;
+    font-size: 30px;}
+        
+  a:link, a:visited {
+     background-color:  red;
+     color: white;
+    padding: 14px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #ff6666;
+}
+ 
+
+  </style>
+</head>
+
+<body>
+  
+<div id="id01" class="modal">
+  
+  <form class="modal-content" action="signup3.php" method="post">
+    <div class="s"><center><h1>Classic Shave - SIGN UP</h1></center></div>
+<div class="container">
+     <div class="clearfix">
+    <table border="0">
+      <tr>
+        <td>First Name</td>
+         <td><input type="text" placeholder="Enter First Name" name="First_Name" maxlength="30" size="18"></td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td> <input type="text" placeholder="Enter Last Name" name="Last_Name" maxlength="40" size="30"></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td> <input type="text" placeholder="Enter Email" name="Email" maxlength="60" size="30"></td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td> <input type="text" placeholder="Enter Address" name="Address" maxlength="60" size="30"></td>
+      </tr>
+      <tr>
+        <td>Phone Number</td>
+        <td><input type="text" placeholder="Enter Phone Number" name="Phone_Number" maxlength="30" size="25"></td>
+      </tr>
+      <tr>
+        <td>Login ID</td>
+        <td><input type="text"  placeholder="Enter Login ID" name="Login_ID" maxlength="20" size="20"></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="text" placeholder="Enter Password" name="Password" maxlength="30" size="20"></td>
+      </tr>
+      
+      <tr>
+  
+     <td>  <button type="submit" class="signupbtn">Sign Up</button></td>
+      <td><a href="CustomerLogin.php">Return</a></td>
+      </tr>
+      
+    </table>
+    </div>
+    </div>
+  </form>
+  </div>
+</body>
+</html>
