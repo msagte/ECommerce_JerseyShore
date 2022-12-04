@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title>Classic Shave Customer Login</title>
+	<title>Jersey Shore Sports Customer Login</title>
 	<style type="text/css">
 		div {
 			text-align: center;
@@ -65,7 +65,7 @@
 					<p class="error">Incorrect username or password</p>
 					<?php } ?>
 					<div class="s">
-						<h1>Classic Shave Customer Login</h1>
+						<h1>Jersey Shore Sports Customer Login</h1>
 						
 						<label><b>Login ID</b></label>
 						<input type="text" name="Login_ID" id="Login_ID" placeholder="Login ID">

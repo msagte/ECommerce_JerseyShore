@@ -40,7 +40,7 @@ if(empty($_SESSION["shopping_cart"])) {
 ?>
 <html>
 <head>
-<title>Classic Shave Producs</title>
+<title>Jersey Shore Sports Producs</title>
 <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
 <style>
     
@@ -52,7 +52,7 @@ if(empty($_SESSION["shopping_cart"])) {
 </head>
 <body>
 <div style = "text-align: center">
-   <div class="s"><h2>Classic Shave Products - Razors</h2></div>   
+   <div class="s"><h2>Jersey Shore Sports Products - Razors</h2></div>   
 </div>
 <a href="Home.html" style = "float:left; padding-left: 300px">
     <img src="pictures/Homelogo.png" alt="Home" style="width:50px">

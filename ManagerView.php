@@ -9,7 +9,7 @@ if(isset($_POST['but1_submit'])){
 
     if ($uname != "" && $password != ""){
 
-        $sql_query = "select count(*) as cntUser from Manager where Login_ID='".$uname."' and Password='".md5($password)."'";
+        $sql_query = "select count(*) as cntUser from Employee where Login_ID='".$uname."' and Password='".md5($password)." and Is_Manager=1'";
         $result = mysqli_query($con,$sql_query);
         $row = mysqli_fetch_array($result);
 
@@ -29,7 +29,7 @@ if(isset($_POST['but1_submit'])){
 
 <html>
     <head>
-        <title>Classic Shave Login</title>
+        <title>Jersey Shore Sports Login</title>
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>

@@ -1,9 +1,9 @@
 <?php
 session_start();
 $host = "localhost"; 
-$user = "grammaa2_aldo";
-$pass = "Grammatica101!!";
-$db = "grammaa2_Classic_Shave_database";
+$user = "root";
+$pass = "";
+$db = "Esports_Website";
 
 if(!$conn = mysqli_connect($host,$user,$pass,$db))
 {
@@ -85,7 +85,7 @@ a:hover, a:active {
             </style>
     </head>
     <body>    
-        <h1>Classic Shave Customer Home Portal </h1>
+        <h1>Jersey Shore Sports Customer Home Portal </h1>
       
       <table border = "0" cellpadding="10" cellspacing="10" class="center" height="325px"  style="width:100%">
      <tr>

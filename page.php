@@ -31,7 +31,7 @@ if(isset($_POST['but1_submit'])){
 
 <html>
     <head>
-        <title>Classic Shave Login</title>
+        <title>Jersey Shore Sports Login</title>
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>

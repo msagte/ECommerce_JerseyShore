@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+  session_start();
+}
 $host = "localhost"; /* Host name */
 $user = "root"; /* User */
 $password = ""; /* Password */

@@ -18,7 +18,7 @@ if(isset($_POST['but1_submit'])){
 
         if($count > 0){
             $_SESSION['uname'] = $uname;
-            header('Location: Adminhome.php');
+            header('Location: DatabaseEmployeehome.php');
         }else{
             echo "Invalid username and password";
         }
@@ -30,7 +30,7 @@ if(isset($_POST['but1_submit'])){
 
 <html>
     <head>
-        <title>Classic Shave Login</title>
+        <title>Jersey Shore Sports Login</title>
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>

@@ -1,9 +1,9 @@
 <?php
 session_start ();
 $hostName= 'localhost';
-$authName= 'grammaa2_aldo';
-$pass='Grammatica101!!';
-$dbname= 'grammaa2_Classic_Shave_database';
+$authName= 'root';
+$pass='';
+$dbname= 'esports_website';
 
 $conn=new mysqli($hostName,$authName,$pass,$dbname);
 

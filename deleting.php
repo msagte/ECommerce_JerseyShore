@@ -1,9 +1,9 @@
 <html>
 <head>
-  <title>Classic Shave Entry Results</title>
+  <title>Jersey Shore Sports Entry Results</title>
 </head>
 <body>
-<h1>Classic Shave Entry Results</h1>
+<h1>Jersey Shore Sports Entry Results</h1>
 <?php
   // create short variable names
  
@@ -23,7 +23,7 @@
     
   }
 
-  @ $db = new mysqli('localhost', 'grammaa2_aldo', 'Grammatica101!!', 'grammaa2_Classic_Shave_database');
+  @ $db = new mysqli('localhost', 'root', '', 'esports_website');
 
   if (mysqli_connect_errno()) {
      echo "Error: Could not connect to database.  Please try again later.";

@@ -42,7 +42,7 @@ if(empty($_SESSION["shopping_cart"])) {
 <html>
 
 <head>
-    <title>Classic Shave Producs</title>
+    <title>Jersey Shore Sports Producs</title>
 
     <link rel='stylesheet' href='css/style.css' type='text/css' media='all'/>
 
@@ -59,7 +59,7 @@ if(empty($_SESSION["shopping_cart"])) {
 
 <div style = "text-align: center">
     
-   <div class="s"> <h2>Classic Shave Products - Shaving Cream</h2></div>  
+   <div class="s"> <h2>Jersey Shore Sports Products - Shaving Cream</h2></div>  
     
 </div>
 

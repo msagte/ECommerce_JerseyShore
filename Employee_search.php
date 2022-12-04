@@ -16,7 +16,7 @@
     $searchterm = addslashes($searchterm);
   }
 
-  @ $db = new mysqli('localhost', 'grammaa2_aldo', 'Grammatica101!!', 'grammaa2_Classic_Shave_database');
+  @ $db = new mysqli('localhost', 'root', '', 'esports_website');
 
   if (mysqli_connect_errno()) {
      echo 'Error: Could not connect to database.  Please try again later.';

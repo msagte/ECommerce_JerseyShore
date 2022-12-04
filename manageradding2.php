@@ -1,8 +1,8 @@
 <?php
 $hostName= 'localhost';
-$authName= 'grammaa2_aldo';
-$pass='Grammatica101!!';
-$dbname= 'grammaa2_Classic_Shave_database';
+$authName= 'root';
+$pass='';
+$dbname= 'esports_website';
 
 $conn=new mysqli($hostName,$authName,$pass,$dbname);
 
@@ -25,8 +25,8 @@ $conn=new mysqli($hostName,$authName,$pass,$dbname);
  
  
  
- $insert ="INSERT into Manager ( First_Name, Last_Name, Manager_ID, Email,  Login_ID, Password) 
- VALUES  ('$fname', '$lname', '$employee', '$email',   '$username', '$encrypted_pwd')";
+ $insert ="INSERT into Employee ( First_Name, Last_Name, Manager_ID, Email,  Login_ID, Password,Is_Manager) 
+ VALUES  ('$fname', '$lname', '$employee', '$email',   '$username', '$encrypted_pwd',1)";
  if($conn->query($insert)){
   echo 'You have entered a manager';
  }
