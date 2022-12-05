@@ -61,9 +61,11 @@
 			<form method="post" class="modal-content" action="customerhome.php">
 
 
-					<?php if ($_GET['error']=="true") { ?>
+					<?php if (isset($_GET['error'])) {
+	                    if ($_GET['error'] == "true") { ?>
 					<p class="error">Incorrect username or password</p>
-					<?php } ?>
+					<?php }
+                    } ?>
 					<div class="s">
 						<h1>Jersey Shore Sports Customer Login</h1>
 						
