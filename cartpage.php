@@ -52,9 +52,10 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
     <img src="pictures/Homelogo.png" alt="Home" style="width:50px">
     </a> 
 <div class="cart">
-<?php
-{
-$cart_count = count(array_keys($_SESSION["shopping_cart"]));
+<?php {
+  if (isset($_POST["shopping_cart"])) {
+    $cart_count = count(array_keys($_SESSION["shopping_cart"]));
+
 ?>
 <div class="cart_div">
 <a href="cartpage.php">
@@ -63,6 +64,7 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"]));
 <span><?php echo $cart_count; ?></span></a>
 </div>
 <?php
+  }
 }
 ?>
 
@@ -132,11 +134,19 @@ $total_price += ($product["Price"]*$product["quantity"]);
 
 <div class="message_box" style="margin:10px 0px;">
 <?php echo $status;
+$host = "localhost"; /* Host name */
+$user = "root"; /* User */
+$password = ""; /* Password */
+$dbname = "esports_website"; /* Database name */
+$con = mysqli_connect($host, $user, $password,$dbname);
 mysqli_close($con);?>
 </div>
 
 </div>
+</tbody>
+</table>
 
- 
+<a href="customerhome.php">Return</a>
+
 </body>
 </html>

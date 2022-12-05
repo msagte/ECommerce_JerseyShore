@@ -2,10 +2,13 @@
 session_start();
 
 unset($_SESSION['cuname']);
-
-if($_SESSION['cuname']==''){
-    echo('you are logged out');
+if (isset($_POST['cuname'])) {
+    
+   // if ($_SESSION['cuname'] == '') {
+     //   echo ('you are logged out');
+    //}
 }
+echo ('you are logged out');
 
 
 ?>
