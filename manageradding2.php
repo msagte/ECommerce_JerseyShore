@@ -15,17 +15,34 @@ $conn=new mysqli($hostName,$authName,$pass,$dbname);
 
  $employee = $_POST['Manager_ID'];
  
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($lname)) {
    
     $lname = addslashes($lname);
+  }
+  if (!stripslashes_deep($fname))
+  {
     $fname = addslashes($fname);
+  }
+  if (!stripslashes_deep($email))
+  {
     $email = addslashes($email);
+  }
+  if (!stripslashes_deep($email))
+  {
     $username = addslashes($username);
   }
+  
  
+  function stripslashes_deep($value)
+  {
+      $value = is_array($value) ?
+                  array_map('stripslashes_deep', $value) :
+                  stripslashes($value);
+  
+      return $value;
+  }
  
- 
- $insert ="INSERT into Employee ( First_Name, Last_Name, Manager_ID, Email,  Login_ID, Password,Is_Manager) 
+ $insert ="INSERT into Employee ( First_Name, Last_Name, Employee_ID, Email,  Login_ID, Password,Is_Manager) 
  VALUES  ('$fname', '$lname', '$employee', '$email',   '$username', '$encrypted_pwd',1)";
  if($conn->query($insert)){
   echo 'You have entered a manager';
