@@ -54,7 +54,7 @@ CREATE TABLE `customer` (
   `Address` varchar(1000) DEFAULT NULL,
   `Phone_Number` int(10) DEFAULT NULL,
   `Login_ID` varchar(15) NOT NULL,
-  `Password` varchar(12) NOT NULL
+  `Password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
