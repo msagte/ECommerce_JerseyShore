@@ -6,7 +6,7 @@
 <h1>Jersey Shore Sports Delete Admin Results</h1>
 <?php
   // create short variable names
- 
+ require("include/function.php");
   $Database_Worker_ID=$_POST['Database_Worker_ID'];
  
   
@@ -17,7 +17,7 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($Database_Worker_ID) {
    
     $Database_Worker_ID = addslashes($Database_Worker_ID);
     

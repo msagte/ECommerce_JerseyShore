@@ -2,6 +2,7 @@
 <body>
 <h1>Classic Search Results</h1>
 <?php
+require("include/function.php");
   // create short variable names
   $searchtype=$_POST['searchtype'];
   $searchterm=trim($_POST['searchterm']);
@@ -11,8 +12,10 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()){
+  if (!stripslashes_deep($searchtype)){
     $searchtype = addslashes($searchtype);
+  }
+  if (!stripslashes_deep($searchterm)){
     $searchterm = addslashes($searchterm);
   }
 

@@ -6,7 +6,8 @@
 <h1>Jersey Shore Sports Delete Customer</h1>
 <?php
   // create short variable names
- 
+  require("include/function.php");
+  
   $First_Name=$_POST['First_Name'];
   $Last_Name=$_POST['Last_Name'];
  
@@ -18,9 +19,11 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($First_Name)) {
    
     $First_Name = addslashes($First_Name);
+  }
+  if (!stripslashes_deep($Last_Name)) {
     $Last_Name = addslashes($Last_Name);
     
   }

@@ -5,6 +5,7 @@
 <body>
 <h1>Jersey Shore Sports Customer sign up Entry Results</h1>
 <?php
+require("include/function.php");
   // create short variable names
 
   $Password=$_POST['Password'];
@@ -18,14 +19,27 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($First_Name)) {
     $First_Name = addslashes($First_Name);
+  }
+  if (!stripslashes_deep($Last_Name)) {
     $Last_Name = addslashes($Last_Name);
+  }
+  if (!stripslashes_deep($Email)) {
     $Employee_ID = addslashes($Email);
+  }
+  if (!stripslashes_deep($Address)) {
     $Address = addslashes($Address);
+  }
+  if (!stripslashes_deep($Phone_Number)) {
     $Phone_Number = addslashes($Phone_Number);
+  }
+  if (!stripslashes_deep($Login_ID)) {
     $Login_ID = addslashes($Login_ID);
+  }
+  if (!stripslashes_deep($Password)) {
     $Password = addslashes($Password);
+  }
     
 
    

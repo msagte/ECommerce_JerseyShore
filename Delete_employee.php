@@ -17,7 +17,7 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($Employee_ID)) {
    
     $Employee_ID = addslashes($Employee_ID);
     

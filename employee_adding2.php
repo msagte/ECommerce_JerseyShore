@@ -5,6 +5,7 @@ $pass='';
 $dbname= 'esports_website';
 
 $conn=new mysqli($hostName,$authName,$pass,$dbname);
+require('include/function.php');
 
  $pwd = $_POST['Password'];
  $encrypted_pwd = md5($pwd);
@@ -32,14 +33,7 @@ if (!stripslashes_deep($email))
   $username = addslashes($username);
 }
  
-  function stripslashes_deep($value)
-  {
-      $value = is_array($value) ?
-                  array_map('stripslashes_deep', $value) :
-                  stripslashes($value);
   
-      return $value;
-  }
  
  
  $insert ="INSERT into Employee ( First_Name, Last_Name, Employee_ID, Email, Login_ID , Password) 

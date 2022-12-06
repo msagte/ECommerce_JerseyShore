@@ -72,7 +72,10 @@ if(empty($_SESSION["shopping_cart"])) {
 
 <?php
 {
-$cart_count = count(array_keys($_SESSION["shopping_cart"]));
+	if (isset($_SESSION["shopping_cart"])) {
+		$cart_count = count(array_keys($_SESSION["shopping_cart"]));
+	} else
+		$cart_count = 0;
 ?>
 
 <div class="cart_div">

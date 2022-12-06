@@ -1,4 +1,5 @@
 <?php
+require("include/function.php");
 session_start ();
 $hostName= 'localhost';
 $authName= 'root';
@@ -16,11 +17,16 @@ $conn=new mysqli($hostName,$authName,$pass,$dbname);
  $address = $_POST['Address'];
  $phone = $_POST['Phone_Number'];
  
-  if (!get_magic_quotes_gpc()) {
-   
+  if (!stripslashes_deep($lname)) {   
     $lname = addslashes($lname);
+  }
+  if (!stripslashes_deep($fname)) {
     $fname = addslashes($fname);
+  }
+  if (!stripslashes_deep($email)) {
     $email = addslashes($email);
+  }
+  if (!stripslashes_deep($username)) {
     $username = addslashes($username);
   }
  

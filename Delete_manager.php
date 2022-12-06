@@ -5,6 +5,7 @@
 <body>
 <h1>Jersey Shore Sports Delete Employee Results</h1>
 <?php
+require("include/function.php");
   // create short variable names
  
   $Manager_ID=$_POST['Manager_ID'];
@@ -17,7 +18,7 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($Manager_ID) {
    
     $Manager_ID = addslashes($Manager_ID);
     

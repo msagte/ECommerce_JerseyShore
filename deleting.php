@@ -6,7 +6,7 @@
 <h1>Jersey Shore Sports Entry Results</h1>
 <?php
   // create short variable names
- 
+  require('include/function.php');
   $Product_ID=$_POST['Product_ID'];
  
   
@@ -17,7 +17,7 @@
      exit;
   }
 
-  if (!get_magic_quotes_gpc()) {
+  if (!stripslashes_deep($Product_ID)) {
    
     $Product_ID = addslashes($Product_ID);
     

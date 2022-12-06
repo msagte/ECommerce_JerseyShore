@@ -10,7 +10,7 @@
     <table border="0">
       <tr>
         <td>ID</td>
-         <td><input type="text" name="Product_ID" maxlength="30" size="13"></td>
+         <td><input type="number" name="Product_ID" maxlength="30" size="13"></td>
       </tr>
       <tr>
         <td>Brand</td>
@@ -26,15 +26,18 @@
       </tr>
       <tr>
         <td>Price $</td>
-        <td><input type="text" name="Price" maxlength="7" size="7"></td>
+        <td><input type="number" name="Price" maxlength="7" size="7"></td>
       </tr>
       <tr>
         <td>Quantity</td>
-        <td><input type="text" name="Quantity" maxlength="7" size="7"></td>
+        <td><input type="number" name="Quantity" maxlength="7" size="7"></td>
       </tr>
       <tr>
+        <div class="file">
         <td>Images</td>
-        <td><input type="text" name="Images" maxlength="30" size="30"></td>
+        <td><img src="<?php echo $img1; ?>" alt="" id="preview1" /></td>
+        <td> <input type="file" name="Images" id="uploadimage" onchange="show_preview('preview1','uploadimage')" maxlength="100" size="130"/>        </td>
+      </div>
       </tr>
       <tr>
         <td colspan="2"><input type="submit" value="Register"></td>
