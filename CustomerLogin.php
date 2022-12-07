@@ -28,8 +28,8 @@ echo ('you are logged out');
     </head>
 
     <body>
-        <div class="container-fluid vh-100" style="margin-top:300px">
-            <div class="" style="margin-top:200px">
+	<div class="container-fluid vh-70" style="margin-top:50px">
+        <div class="" style="margin-top:50px">
                 <div class="rounded d-flex justify-content-center">
                     <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
                         <div class="text-center">
