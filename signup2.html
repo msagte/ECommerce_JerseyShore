@@ -120,12 +120,12 @@ a:hover, a:active {
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline">                 
-                  <input type="text" id="First_Name" class="form-control" placeholder="Enter First Name" name="First_Name" maxlength="60" size="30" />                    
+                  <input type="text" id="First_Name" class="form-control" placeholder="Enter First Name" name="First_Name" maxlength="60" size="30" required/>                    
                 </div>
               </div>
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
-                  <input type="text"  id="Last_Name" class="form-control"  placeholder="Enter Last Name" name="Last_Name" maxlength="60" size="30"/>
+                  <input type="text"  id="Last_Name" class="form-control"  placeholder="Enter Last Name" name="Last_Name" maxlength="60" size="30" required/>
                 </div>
               </div>
             </div>
@@ -134,20 +134,20 @@ a:hover, a:active {
             <!-- Email input -->
             <div class="col-md-6 mb-4">
               <div class="form-outline">
-              <input type="email" id="Email" class="form-control" placeholder="Enter Email Address" name="Email" maxlength="60" size="30" />
+              <input type="email" id="Email" class="form-control" placeholder="Enter Email Address" name="Email" maxlength="60" size="30" required/>
             </div>
             </div>
 
             <div class="col-md-6 mb-4">
               <div class="form-outline">
-              <input type="number" placeholder="Enter Phone number" name="Phone_Number" maxlength="30" size="25"   class="form-control" id="Phone_Number" />
+              <input type="number" placeholder="Enter Phone number" name="Phone_Number" maxlength="30" size="25"   class="form-control" id="Phone_Number" required />
             </div>
             </div>
           </div>
 
             <div class="col-md-12 mb-4">
               <div class="form-outline">
-              <input type="text" placeholder="Enter Address" name="Address" maxlength="60" size="230"  class="form-control" id="Address" />
+              <input type="text" placeholder="Enter Address" name="Address" maxlength="60" size="230"  class="form-control" id="Address" required/>
             </div>
             </div>
           
@@ -155,13 +155,13 @@ a:hover, a:active {
             <!-- Password input -->
             <div class="col-md-6 mb-4"">
               <div class="form-outline">
-                <input type="text" id="Login_ID" class="form-control" placeholder="Enter Login ID" name="Login_ID" maxlength="20" size="20">
+                <input type="text" id="Login_ID" class="form-control" placeholder="Enter Login ID" name="Login_ID" maxlength="20" size="20" required>
             </div>
             </div>
           
             <div class="col-md-6 mb-4"">
               <div class="form-outline">
-                <input type="password" id="Password" class="form-control" placeholder="Enter Password" name="Password" maxlength="60" size="30">
+                <input type="password" id="Password" class="form-control" placeholder="Enter Password" name="Password" maxlength="60" size="30" required>
             </div>
             </div>
           </div>
@@ -178,12 +178,11 @@ a:hover, a:active {
             <button type="submit" class="btn btn-primary btn-block mb-4">
               Sign up
             </button>
-            <button type="submit" class="btn btn-primary btn-block mb-4">
+            <button type="button" onclick="window.location='CustomerLogin.php';" class="btn btn-primary btn-block mb-4">
               Return
             </button>
             <!-- Register buttons -->
-            <div class="text-center">
-              <p>or sign up with:</p>
+            <div class="text-center">              
               <button type="button" class="btn btn-link btn-floating mx-1">
                 <i class="fab fa-facebook-f"></i>
               </button>
