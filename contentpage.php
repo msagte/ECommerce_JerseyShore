@@ -59,7 +59,7 @@ if(empty($_SESSION["shopping_cart"])) {
 
 <div style = "text-align: center">
     
-   <div class="s"> <h2>Jersey Shore Sports Products - Shaving Cream</h2></div>  
+   <div class="s"> <h2>Jersey Shore Sports Products</h2></div>  
     
 </div>
 

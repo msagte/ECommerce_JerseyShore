@@ -15,6 +15,26 @@ if(!empty($_SESSION["shopping_cart"])) {
 			}		
 		}
 }
+if (isset($_REQUEST['Product_Id']) and $_REQUEST['Product_Id'] != "") {
+  $Product_ID = $_POST['Product_Id'];
+  $result = mysqli_query($con,"SELECT * FROM `Product` WHERE `Product_ID`='$Product_ID'");
+  $row = mysqli_fetch_assoc($result);
+  $Name = $row['Name'];
+  $Brand = $row['Brand'];
+  $Price = $row['Price'];
+  $Product_ID = $row['Product_ID'];
+  $Quantity = $_POST['Quantity'];
+  $Images = $row['Images'];
+  
+  $cartArray = array(
+    $Product_ID=>array(
+    'Name'=>$Name,
+    'Price'=>$Price,
+    'Product_ID'=>$Product_ID,
+    'quantity'=>$Quantity,
+    'Images'=>$Images)
+  );
+}
 
 if (isset($_POST['action']) && $_POST['action']=="change"){
   foreach($_SESSION["shopping_cart"] as &$value){

@@ -89,7 +89,7 @@ a:hover, a:active {
       
       <table border = "0" cellpadding="10" cellspacing="10" class="center" height="325px"  style="width:100%">
      <tr>
-         <td> <a href="Home.html" ><p>Home Page</p> </a> </td>
+         <td> <a href="product.php" ><p>Products</p> </a> </td>
          <td>  <a href="cartpage.php" ><p>Cart Page</p> </a> </td>
      </tr>    
      
