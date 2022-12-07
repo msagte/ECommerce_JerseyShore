@@ -1,5 +1,5 @@
 <?php
-
+include("config.php");
 session_start();
 $status="";
 if (isset($_POST['action']) && $_POST['action']=="remove"){
@@ -15,8 +15,9 @@ if(!empty($_SESSION["shopping_cart"])) {
 			}		
 		}
 }
-if (isset($_REQUEST['Product_Id']) and $_REQUEST['Product_Id'] != "") {
-  $Product_ID = $_POST['Product_Id'];
+if (isset($_REQUEST['Product_ID']) && $_REQUEST['Product_ID'] != "") 
+{
+  $Product_ID = $_REQUEST['Product_ID'];
   $result = mysqli_query($con,"SELECT * FROM `Product` WHERE `Product_ID`='$Product_ID'");
   $row = mysqli_fetch_assoc($result);
   $Name = $row['Name'];
