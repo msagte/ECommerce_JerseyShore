@@ -94,8 +94,8 @@ a:hover, a:active {
      </tr>    
      
      <tr>
-         <td><a href="logout.php" ><p>Logout</p> </a></td>
-         <td><a href="orderhistory.php" ><p>Oder History</p></td>
+         <td><a href="customerlogin.php" ><p>Logout</p> </a></td>
+         <td><a href="orderhistory.php" ><p>Order History</p></td>
      </tr>
 
 </table>

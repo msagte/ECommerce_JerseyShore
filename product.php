@@ -22,8 +22,7 @@ require 'config.php';
             <th>Name</th>
             <th>Brand</th>
             <th>Category</th>
-            <th>Image</th>           
-            <th>Quantity</th>
+            <th>Image</th>       
             <th>Price</th>
             <th class="text-center">Action</th>
         </tr>
@@ -47,7 +46,6 @@ require 'config.php';
             <td><?php echo $row['Brand'];?></td>
             <td><?php echo $row['Category'];?></td>
             <td><img src="Pictures/<?php echo $row['Images']; ?>" alt="product" width="200" height="200" /></td>
-            <td><input type="number" id="quantity" name="quantity"/></td>
             <td align="center"><?php echo $row['Price'];?></td>
             <td align="center">
                 <a href="cartpage.php?Product_ID=<?php echo $idd ?>" class="text-primary">Add to Cart</a> 

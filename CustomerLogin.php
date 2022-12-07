@@ -1,64 +1,43 @@
-<?php session_start(); ?>
+
+<?php
+session_start();
+
+unset($_SESSION['cuname']);
+if (isset($_POST['cuname'])) {
+    
+   // if ($_SESSION['cuname'] == '') {
+     //   echo ('you are logged out');
+    //}
+	
+echo ('you are logged out');
+}
+
+
+?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head>
-	<title>Jersey Shore Sports Customer Login</title>
-	<style type="text/css">
-		div {
-			text-align: center;
-		}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bootstrap 5 Login Form Example</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    </head>
 
-		h1 {
-			text-align: center;
-		}
-
-		h2 {
-			text-align: center;
-		}
-
-		body {
-			Background-color: #66b3ff;
-		}
-
-
-		.s {
-			font-family: 'Brush Script MT', cursive;
-			font-size: 30px;
-		}
-
-		form {
-			text-align: center;
-		}
-
-		.modal-content {
-			background-color: white;
-			margin: 5% auto 15% auto;
-			border: 1px solid #888;
-			width: 80%;
-		}
-
-
-		.modal {
-
-			position: fixed;
-			z-index: 1;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			overflow: auto;
-			background-color: #80bfff;
-			padding-top: 50px;
-		}
-	</style>
-</head>
-
-<body>
-	<div id="id01" class="modal">
-
-		<div class="login">
-			<form method="post" class="modal-content" action="customerhome.php">
+    <body>
+        <div class="container-fluid vh-100" style="margin-top:300px">
+            <div class="" style="margin-top:200px">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                        <div class="text-center">
+						<img src="pictures/Homelogo.png"
+                    style="width: 185px;" alt="logo">
+                            <h3 class="text-primary">Customer Sign In</h3>
+                        </div>
+                <form method="post" class="modal-content" action="customerhome.php">
 
 
 					<?php if (isset($_GET['error'])) {
@@ -66,24 +45,30 @@
 					<p class="error">Incorrect username or password</p>
 					<?php }
                     } ?>
-					<div class="s">
-						<h1>Jersey Shore Sports Customer Login</h1>
-						
-						<label><b>Login ID</b></label>
-						<input type="text" name="Login_ID" id="Login_ID" placeholder="Login ID">
-						<br><br>
-						
-						<label><b>Password</b></label>
-						<input type="Password" name="Password" id="Password" placeholder="Password">
-						<br><br>
-						
-						<input type="submit" name="login" value="Login">
-						<p>Not a member? Sign up to become one.</p>
-					</div>
-				<a href="signup2.html">Sign up</a>	
-				<a href="EmployeePortal.html">for Staff</a>
-			</form>
-		</div>
-	</div>
-</body>
+                            <div class="p-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" name="Login_ID" id="Login_ID" placeholder="Login ID">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" name="Password" id="Password" placeholder="Password">
+                                </div>
+                                <div class="col-md-12 text-center">
+                                <button class="btn btn-primary text-center mt-2" type="submit">
+                                    Login
+                                </button></div>
+                                <p class="text-center mt-5">Don't have an account?									
+                                    <span class="text-primary"><a href="signup2.html">Sign up</a></span>
+                                </p>                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
 </html>
