@@ -42,19 +42,19 @@ echo ('you are logged out');
 
 					<?php if (isset($_GET['error'])) {
 	                    if ($_GET['error'] == "true") { ?>
-					<p class="error">Incorrect username or password</p>
+					<div class="col-sm-12 text-align--center error">Invalid Username and Password Combination</div>
 					<?php }
                     } ?>
                             <div class="p-4">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
-                                    <input type="text" class="form-control" name="Login_ID" id="Login_ID" placeholder="Login ID">
+                                    <input type="text" class="form-control" name="Login_ID" id="Login_ID" placeholder="Login ID" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i
                                             class="bi bi-key-fill text-white"></i></span>
-                                    <input type="password" class="form-control" name="Password" id="Password" placeholder="Password">
+                                    <input type="password" class="form-control" name="Password" id="Password" placeholder="Password" required>
                                 </div>
                                 <div class="col-md-12 text-center">
                                 <button class="btn btn-primary text-center mt-2" type="submit">
