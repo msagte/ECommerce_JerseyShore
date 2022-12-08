@@ -80,6 +80,8 @@ if(isset($_POST['but1_submit'])){
                             </button>
                             <p class="text-center mt-5">Are you a customer?									
                                     <span class="text-primary"><a href="CustomerLogin.php">Log In As Customer</a></span>
+                                    <p class="text-center mt-5">Login as Admin?									
+                                    <span class="text-primary"><a href="DatabaseEmployeeView.php">Log In As Admin</a></span>
                                 </p>   
                             </div>                                                        
                         </div>
