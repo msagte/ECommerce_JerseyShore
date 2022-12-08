@@ -42,6 +42,7 @@ if (isset($_POST['Product_ID'])) {
   $Product_ID = $_POST['Product_ID'];
 }
 if (isset($_POST['Category'])) {
+  
   $bdefined = true;
   $Category = $_POST['Category'];
 }
@@ -60,6 +61,7 @@ if ($bdefined == true) {
       . "Please go back and try again.";
     exit;
   }
+
 
 
   if (!stripslashes_deep($Name)) {
@@ -105,6 +107,8 @@ if ($bdefined == true) {
 
   $db->close();
 }
+
+
 ?>
  <br>
  <br>

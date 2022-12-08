@@ -35,7 +35,7 @@ a:hover, a:active {
          
  
      <h2>Product Insert</h2>
-     <a href="productIP.html" target="_blank">Add Product</a>
+     <a href="form.php" target="_blank">Add Product</a>
        <br>
      <h2>Product Delete</h2>
         <a href="productdelete.html" target="_blank">Delete Product</a>
