@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2022 at 03:27 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Dec 08, 2022 at 06:14 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,45 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`ID`, `Login_ID`, `Password`) VALUES
-(1, 'ADMIN', '047ec6004b57618f410b26423fb6e774');
+(1, 'ADMIN', 'e10adc3949ba59abbe56e057f20f883e');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE `brand` (
+  `Brand_ID` int(11) NOT NULL,
+  `Brand_Name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
+(1, 'Nike '),
+(2, 'Head');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `Category_ID` int(11) NOT NULL,
+  `Category_Name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
+(1, 'Tennis '),
+(2, 'Golf');
 
 -- --------------------------------------------------------
 
@@ -56,6 +94,13 @@ CREATE TABLE `customer` (
   `Login_ID` varchar(15) NOT NULL,
   `Password` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`Cust_ID`, `First_Name`, `Last_Name`, `Email`, `Address`, `Phone_Number`, `Login_ID`, `Password`) VALUES
+(1, 'yamini', 'chitikela', 'yaminichitikela@gmail.com', '13frank', 551358542, 'yamini', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -107,12 +152,19 @@ CREATE TABLE `orders` (
 CREATE TABLE `product` (
   `Product_ID` int(12) NOT NULL,
   `Name` varchar(200) NOT NULL,
-  `Brand` varchar(200) NOT NULL,
+  `brand_id` int(11) NOT NULL,
   `Price` decimal(15,0) NOT NULL,
-  `Category` varchar(200) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `Quantity` int(12) NOT NULL,
   `Images` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Product_ID`, `Name`, `brand_id`, `Price`, `category_id`, `Quantity`, `Images`) VALUES
+(1, 'Product 1', 1, '123', 1, 3, 'pictures/bat.png');
 
 --
 -- Indexes for dumped tables
@@ -123,6 +175,18 @@ CREATE TABLE `product` (
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`Brand_ID`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`Category_ID`);
 
 --
 -- Indexes for table `customer`
@@ -156,7 +220,9 @@ ALTER TABLE `orders`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`Product_ID`);
+  ADD PRIMARY KEY (`Product_ID`),
+  ADD KEY `Category_constraint` (`category_id`),
+  ADD KEY `Brand_constraint` (`brand_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -169,10 +235,22 @@ ALTER TABLE `admin`
   MODIFY `ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orderdetail`
@@ -202,6 +280,13 @@ ALTER TABLE `orderdetail`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `cust_ID_FK` FOREIGN KEY (`Cust_ID`) REFERENCES `customer` (`Cust_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `Brand_constraint` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`Brand_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Category_constraint` FOREIGN KEY (`category_id`) REFERENCES `category` (`Category_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
