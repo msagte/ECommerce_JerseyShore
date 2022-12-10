@@ -44,7 +44,7 @@ if(isset($_POST['but1_submit'])){
     overflow-y: auto;
 }
 </style>
-
+<form method="post" action="">
 <body>
     <div class="container-fluid vh-70" style="margin-top:50px">
         <div class="" style="margin-top:50px">
@@ -75,7 +75,7 @@ if(isset($_POST['but1_submit'])){
                                         <input type="password" class="form-control" id="txt1_pwd" name="txt1_pwd" placeholder="Password"/>
                             </div>
                             <div class="col-md-12 text-center">
-                            <button class="btn btn-primary text-center mt-2" type="submit">
+                            <button class="btn btn-primary text-center mt-2" type="submit" name="but1_submit" id="but1_submit">
                                 Login
                             </button>
                             <p class="text-center mt-5">Are you a customer?									
@@ -91,12 +91,12 @@ if(isset($_POST['but1_submit'])){
         </div>
     </div>
 </body>
-
+</form>
 </html>
 
 <!-- <html>
     <head>
-        <title>Jersey Shore Sports Login</title>
+        <title>Jersey Shore Furniture Login</title>
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>

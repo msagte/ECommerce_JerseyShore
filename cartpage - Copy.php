@@ -52,7 +52,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
 ?>
 <html>
 <head>
-<title>Jersey Shore Sports Cart</title>
+<title>Jersey Shore Furniture Cart</title>
 <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
 
 <style>

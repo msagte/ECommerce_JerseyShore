@@ -85,7 +85,7 @@ a:hover, a:active {
             </style>
     </head>
     <body>    
-        <h1>Jersey Shore Sports Customer Home Portal </h1>
+        <h1>Jersey Shore Furniture Customer Home Portal </h1>
       
       <table border = "0" cellpadding="10" cellspacing="10" class="center" height="325px"  style="width:100%">
      <tr>

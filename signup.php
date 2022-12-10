@@ -1,9 +1,9 @@
 <html>
 <head>
-  <title>Jersey Shore Sports Customer sign up Entry Results</title>
+  <title>Jersey Shore Furniture Customer sign up Entry Results</title>
 </head>
 <body>
-<h1>Jersey Shore Sports Customer sign up Entry Results</h1>
+<h1>Jersey Shore Furniture Customer sign up Entry Results</h1>
 <?php
 require("include/function.php");
   // create short variable names

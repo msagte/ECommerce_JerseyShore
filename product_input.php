@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Jersey Shore Sports Entry Results</title>
+  <title>Jersey Shore Furniture Entry Results</title>
   <style>
        a:link, a:visited {
   background-color:  #33adff;
@@ -19,7 +19,7 @@ a:hover, a:active {
   </style>
 </head>
 <body>
-<h1>Jersey Shore Sports Entry Results</h1>
+<h1>Jersey Shore Furniture Entry Results</h1>
 <?php
 require("include/function.php");
 $bdefined = false;

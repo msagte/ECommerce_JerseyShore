@@ -30,7 +30,7 @@ if(isset($_POST['but1_submit'])){
 
 <html>
     <head>
-        <title>Jersey Shore Sports Login</title>
+        <title>Jersey Shore Furniture Login</title>
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>

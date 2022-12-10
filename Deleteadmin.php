@@ -1,9 +1,9 @@
 <html>
 <head>
-  <title>Jersey Shore Sports Delete Admin Results</title>
+  <title>Jersey Shore Furniture Delete Admin Results</title>
 </head>
 <body>
-<h1>Jersey Shore Sports Delete Admin Results</h1>
+<h1>Jersey Shore Furniture Delete Admin Results</h1>
 <?php
   // create short variable names
  require("include/function.php");

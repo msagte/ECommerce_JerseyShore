@@ -42,7 +42,7 @@ if(empty($_SESSION["shopping_cart"])) {
 <html>
 
 <head>
-    <title>Jersey Shore Sports Producs</title>
+    <title>Jersey Shore Furniture Producs</title>
 
     <link rel='stylesheet' href='css/style.css' type='text/css' media='all'/>
 
@@ -59,7 +59,7 @@ if(empty($_SESSION["shopping_cart"])) {
 
 <div style = "text-align: center">
     
-   <div class="s"> <h2>Jersey Shore Sports Products</h2></div>  
+   <div class="s"> <h2>Jersey Shore Furniture Products</h2></div>  
     
 </div>
 

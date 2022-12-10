@@ -78,7 +78,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 
       
 </head>
-    <title>Jersey Shore Sports Cart</title>
+    <title>Jersey Shore Furniture Cart</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid"></div>
     <div class="container-fluid"></div>
@@ -95,13 +95,13 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                         <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Insert Product</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">logout</a>
                     </li>
                 </ul>
             </div>

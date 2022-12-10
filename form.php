@@ -1,52 +1,10 @@
-<?php
 
-	// Connect to database
-	$con = mysqli_connect("localhost","root","","esports_website");
-	
-	// Get all the categories from category table
-	$sql = "SELECT * FROM category";
-    $sqls = "SELECT * FROM brand";
-	$all_categories = mysqli_query($con,$sql);
-    $all_brands = mysqli_query($con, $sqls);
-
-	// The following code checks if the submit button is clicked
-	// and inserts the data in the database accordingly
-	if(isset($_POST['submit']))
-	{
-		// Store the Product name in a "name" variable
-		$Name = mysqli_real_escape_string($con,$_POST['Name']);
-        $brand_id = mysqli_real_escape_string($con,$_POST['Brand']);
-        $Price = mysqli_real_escape_string($con,$_POST['Price']);
-        $Product_ID = mysqli_real_escape_string($con,$_POST['Product_ID']);
-        $Quantity = mysqli_real_escape_string($con,$_POST['Quantity']);
-		$Images = mysqli_real_escape_string($con,$_POST['Images']);
-        // $Category = mysqli_real_escape_string($con,$_POST['Category']);
-		// Store the Category ID in a "id" variable
-		$category_id = mysqli_real_escape_string($con,$_POST['Category']);
-		
-		// Creating an insert query using SQL syntax and
-		// storing it in a variable.
-		$sql_insert =
-		"insert into product (Name,brand_id,Price,Product_ID,category_id,Quantity,Images) values
-            ('" . $Name . "', '" . $brand_id . "', '" . $Price . "','" . $Product_ID . "', '" . $category_id . "','" . $Quantity . "','" . $Images . "')";
-
-		
-		// The following code attempts to execute the SQL query
-		// if the query executes with no errors
-		// a javascript alert message is displayed
-		// which says the data is inserted successfully
-		if(mysqli_query($con,$sql_insert))
-		{
-			echo '<script>alert("Product added successfully")</script>';
-		}
-	}
-?>
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Jersey Shore Sports - Insert Product</title>
+  <title>Jersey Shore Furniture - Insert Product</title>
  
   <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,7 +19,49 @@
 </head>
 <body>
 
-<form class="modal-content" action="form.php" method="post">
+<form class="modal-content"  action="form.php" method="post">
+<?php
+
+// Connect to database
+$con = mysqli_connect("localhost","root","","esports_website");
+
+// Get all the categories from category table
+$sql = "SELECT * FROM category";
+  $sqls = "SELECT * FROM brand";
+$all_categories = mysqli_query($con,$sql);
+  $all_brands = mysqli_query($con, $sqls);
+
+// The following code checks if the submit button is clicked
+// and inserts the data in the database accordingly
+if(isset($_POST['submit']))
+{
+  // Store the Product name in a "name" variable
+  $Name = mysqli_real_escape_string($con,$_POST['Name']);
+      $brand_id = mysqli_real_escape_string($con,$_POST['Brand']);
+      $Price = mysqli_real_escape_string($con,$_POST['Price']);      
+      $Quantity = mysqli_real_escape_string($con,$_POST['Quantity']);
+  $Images = mysqli_real_escape_string($con,$_POST['Images']);
+      // $Category = mysqli_real_escape_string($con,$_POST['Category']);
+  // Store the Category ID in a "id" variable
+  $category_id = mysqli_real_escape_string($con,$_POST['Category']);
+  
+  // Creating an insert query using SQL syntax and
+  // storing it in a variable.
+  $sql_insert =
+  "insert into product (Name,brand_id,Price,category_id,Quantity,Images) values
+          ('" . $Name . "', '" . $brand_id . "', '" . $Price . "', '" . $category_id . "','" . $Quantity . "','" . $Images . "')";
+
+  
+  // The following code attempts to execute the SQL query
+  // if the query executes with no errors
+  // a javascript alert message is displayed
+  // which says the data is inserted successfully
+  if(mysqli_query($con,$sql_insert))
+  {
+    echo '<script>alert("Product added successfully")</script>';
+  }
+}
+?>
 <section class="text-center">
   <!-- Background image -->
   
@@ -83,7 +83,7 @@
           <img src="pictures/Homelogo.png"
                     style="width: 185px;" alt="logo">
           <h2 class="fw-bold mb-5">Insert Product</h2>
-          <form>
+          
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row">
               <div class="col-md-12 mb-4">
@@ -98,7 +98,7 @@
 				
                 <div class="dropdown">
 					
-					<select class="form-select" aria-labelledby="dropdownMenu2" name="Category">
+					<select class="form-select" aria-labelledby="dropdownMenu2" name="Category" required>
 						<option selected="">Select Category</option>
 						<?php
 				// use a while loop to fetch data
@@ -173,20 +173,21 @@
         
 		
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">
-              Sign up
+            <button type="submit" id ="submit" name="submit" class="btn btn-primary btn-block mb-4">
+              Add Product
             </button>
             <button type="button" onclick="window.location='CustomerLogin.php';" class="btn btn-primary btn-block mb-4">
               Return
             </button>
             <!-- Register buttons -->
             
-          </form>
+          
         </div>
       </div>
     </div>
   </div>
 </section>
+</form>
 </body>
 
 </html>
