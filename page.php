@@ -55,7 +55,7 @@ if(isset($_POST['but1_submit'])){
                 style="width: 185px;" alt="logo">
                         <h3 class="text-primary">Employee Sign In</h3>
                     </div>
-            <form method="post" class="modal-content" action="customerhome.php">
+            <form method="post" class="modal-content" action="home.php">
 
 
                 <?php if (isset($_GET['error'])) {

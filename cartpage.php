@@ -1,6 +1,10 @@
 <?php
 include("config.php");
-session_start();
+if (!isset($_SESSION["shopping_cart"])) {
+  if (!isset($_SESSION)) {
+    session_start();
+  } 
+}
 $status="";
 if (isset($_POST['action']) && $_POST['action']=="remove"){
 if(!empty($_SESSION["shopping_cart"])) {
@@ -24,7 +28,6 @@ if (isset($_REQUEST['Product_ID']) && $_REQUEST['Product_ID'] != "")
   $Brand = $row['Brand'];
   $Price = $row['Price'];
   $Product_ID = $row['Product_ID'];
-  $Quantity = $_POST['Quantity'];
   $Images = $row['Images'];
   
   $cartArray = array(
@@ -32,9 +35,9 @@ if (isset($_REQUEST['Product_ID']) && $_REQUEST['Product_ID'] != "")
     'Name'=>$Name,
     'Price'=>$Price,
     'Product_ID'=>$Product_ID,
-    'quantity'=>$Quantity,
     'Images'=>$Images)
   );
+  $_SESSION["shopping_cart"] = $cartArray;
 }
 
 if (isset($_POST['action']) && $_POST['action']=="change"){
@@ -49,109 +52,205 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
 ?>
 <html>
 <head>
-<title>Jersey Shore Sports Cart</title>
-<link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login !</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+   
 
-<style>
-    .button {
-  background-color: #66b3ff; 
-  border: none;
-  color: white;
-  padding: 15px 42px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+                   
+    <style>
+
+.gradient-custom {
+/* fallback for old browsers */
+background: #6a11cb;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
-</style>
-</head>
-<body>
-<div style="width:700px; margin:50 auto;">
+    </style>
 
-<h2>Shopping Cart</h2>   
-<a href="Home.html">
-    <img src="pictures/Homelogo.png" alt="Home" style="width:50px">
-    </a> 
-<div class="cart">
-<?php {
+      
+</head>
+    <title>Jersey Shore Sports Cart</title>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid"></div>
+    <div class="container-fluid"></div>
+    <div class="container-fluid"></div>
+    <div class="container-fluid"></div>
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+            aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarExample01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+<section class="h-100 gradient-custom">
+<form method="post" action="cartpage.php">
+  <div class="container py-5">
+  <?php 
   if (isset($_POST["shopping_cart"])) {
     $cart_count = count(array_keys($_SESSION["shopping_cart"]));
 
 ?>
-<div class="cart_div">
-<a href="cartpage.php">
-<img src="pictures/Shoppingcart.png" width='50' height='50' /> Cart
- 
+
 <span><?php echo $cart_count; ?></span></a>
-</div>
+
 <?php
   }
-}
-?>
 
-<?php
-if(isset($_SESSION["shopping_cart"])){
+  if (isset($_SESSION["shopping_cart"])) {
     $total_price = 0;
-?>	
-<table class="table">
-<tbody>
-<tr>
-<td></td>
-<td>ITEM NAME</td>
-<td>QUANTITY</td>
-<td>UNIT PRICE</td>
-<td>ITEMS TOTAL</td>
-</tr>	
-<?php		
-foreach ($_SESSION["shopping_cart"] as $product){
-?>
-<tr>
-<td><img src='<?php echo $product["Images"]; ?>' width="50" height="40" /></td>
-<td><?php echo $product["Name"]; ?><br />
-<form method='post' action=''>
-<input type='hidden' name='Product_ID' value="<?php echo $product["Product_ID"]; ?>" />
-<input type='hidden' name='action' value="remove" />
-<button type='submit' class='remove'>Remove Item</button>
-</form>
-</td>
-<td>
-<form method='post' action=''>
-<input type='hidden' name='Product_ID' value="<?php echo $product["Product_ID"]; ?>" />
-<input type='hidden' name='action' value="change" />
-<select name='quantity' class='quantity' onchange="this.form.submit()">
-<option <?php if($product["quantity"]==1) echo "selected";?> value="1">1</option>
-<option <?php if($product["quantity"]==2) echo "selected";?> value="2">2</option>
-<option <?php if($product["quantity"]==3) echo "selected";?> value="3">3</option>
-<option <?php if($product["quantity"]==4) echo "selected";?> value="4">4</option>
-<option <?php if($product["quantity"]==5) echo "selected";?> value="5">5</option>
-</select>
-</form>
 
-</td>
-<td><?php echo "$".$product["Price"]; ?></td>
-<td><?php echo "$".$product["Price"]*$product["quantity"]; ?></td>
-</tr>
-<?php
-$total_price += ($product["Price"]*$product["quantity"]);
-}
-?>
-<tr>
-<td colspan="5" align="right">
-<strong>TOTAL: <?php echo "$".$total_price; ?></strong>
-</td>
-</tr>
-</tbody>
-<a href="check.php" class="button">Checkout</a>
-</div>
-</table>		
-  <?php
-}else{
+  ?>
+    <div class="row d-flex justify-content-center my-4">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Cart - <?php 
+  echo count(array_keys($_SESSION["shopping_cart"]));
+    
+?> item/s</h5>
+          </div>
+          <div class="card-body">
+            <!-- Single item -->
+            <?php
+    foreach ($_SESSION["shopping_cart"] as $product) {
+            ?>
+            <div class="row">
+              <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                <!-- Image -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img src="pictures/<?php echo $product["Images"]; ?>"
+                    class="w-100" alt=<?php echo $product["Name"]; ?> />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                  </a>
+                </div>
+                <!-- Image -->
+              </div>
+
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <!-- Data -->
+                <p><strong><?php echo $product["Name"]; ?></strong></p>
+                <p>Price: $<?php echo $product["Price"]; ?></p>
+                
+               
+                <!-- Data -->
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <!-- Quantity -->
+                <div class="d-flex mb-4" style="max-width: 300px">
+                
+          
+                    <div class="form-outline">
+                    <input type='hidden' name='Product_ID' value="<?php echo $product["Product_ID"]; ?>" />
+                    <input type='hidden' name='action' value="change" />
+                    <input id="form1" min="0" name="quantity" value="<?php echo $product["quantity"]; ?>" 
+                       type="number" class="form-control" onchange="this.form.submit" />
+                    <label class="form-label" for="form1">Quantity</label>
+                  </div>
+                
+         
+                </div>
+                <!-- Quantity -->
+
+                <!-- Price -->
+               
+                <!-- Price -->
+              </div>
+            </div>
+            <?php 
+      $total_price += ($product["Price"] * $product["quantity"]  );
+    }
+  }
+  else 
+{
 	echo "<h3>Your cart is empty!</h3>";
 	}
-?>
+
+          ?>
+            <!-- Single item -->
+
+            <hr class="my-4" />
+
+           
+            <!-- Single item -->
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p><strong>Expected shipping delivery</strong></p>
+            <p class="mb-0"><script> var date = new Date(); date.setDate(date.getDate() + 2); document.write(date.toLocaleDateString());           
+</script></p>
+          </div>
+        </div>       
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>$<?php echo number_format($total_price, 2, '.', '') ?></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>$5.00</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including Tax)</p>
+                  </strong>
+                </div>
+                <span><strong>$<?php echo number_format($total_price + 5, 2, '.', ''); ?></strong></span>
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-primary btn-lg btn-block">
+              Go to checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</section>
+    
 
 
-<div style="clear:both;"></div>
 
 <div class="message_box" style="margin:10px 0px;">
 <?php echo $status;
@@ -160,12 +259,8 @@ $user = "root"; /* User */
 $password = ""; /* Password */
 $dbname = "esports_website"; /* Database name */
 $con = mysqli_connect($host, $user, $password,$dbname);
-mysqli_close($con);?>
-</div>
+mysqli_close($con);?></div>
 
-</div>
-</tbody>
-</table>
 
 <a href="customerhome.php">Return</a>
 

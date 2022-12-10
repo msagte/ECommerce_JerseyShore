@@ -4,8 +4,8 @@
 	$con = mysqli_connect("localhost","root","","esports_website");
 	
 	// Get all the categories from category table
-	$sql = "SELECT * FROM `category`";
-    $sqls = "SELECT * FROM 'brand'";
+	$sql = "SELECT * FROM category";
+    $sqls = "SELECT * FROM brand";
 	$all_categories = mysqli_query($con,$sql);
     $all_brands = mysqli_query($con, $sqls);
 
@@ -46,21 +46,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0">
+  <title>Jersey Shore Sports - Insert Product</title>
+ 
+  <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up !</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+
 </head>
 <body>
-	<form action="form.php" method="POST"> 
-		<label>Product:</label>
-		<input type="text" name="Name" required><br>
-        <!-- <label>Brand:</label>
-        <input type="text" name="Brand" required><br> -->
-    
-		<label>Select a Category</label>
-		<select name="Category">
-			<?php
+
+<form class="modal-content" action="form.php" method="post">
+<section class="text-center">
+  <!-- Background image -->
+  
+  <div class="p-5 bg-image" style="
+        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <img src="pictures/Homelogo.png"
+                    style="width: 185px;" alt="logo">
+          <h2 class="fw-bold mb-5">Insert Product</h2>
+          <form>
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <div class="form-outline">                 				
+                  <input type="text" id="Name" class="form-control" placeholder="Enter Product Name" name="Name" maxlength="60" size="300" required/>                    
+                </div>
+              </div>
+			  </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+				
+                <div class="dropdown">
+					
+					<select class="form-select" aria-labelledby="dropdownMenu2" name="Category">
+						<option selected="">Select Category</option>
+						<?php
 				// use a while loop to fetch data
 				// from the $all_categories variable
 				// and individually display as an option
@@ -78,12 +118,17 @@
 				endwhile;
 				// While loop must be terminated
 			?>
+				</select>
+                 
+                </div>
+              </div>
             
-		</select>
-		<br>
-		<label>Select a Brand</label>
-		<select name="Brand">
-			<?php
+            <!-- Email input -->
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+              <select class="form-select" name="Brand">
+						<option selected="">Select Brand</option>
+						<?php
 				// use a while loop to fetch data
 				// from the $all_categories variable
 				// and individually display as an option
@@ -101,28 +146,47 @@
 				endwhile;
 				// While loop must be terminated
 			?>
-            
-		</select>
-		<br>
+			  </select>
+            </div>
+            </div>
+			
+			
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+              <input type="number" placeholder="Price" name="Price" maxlength="30" size="25"   class="form-control" id="Price" required />
+            </div>
+            </div>
+          
+
+            <div class="col-md-6 mb-4">
+              <div class="form-outline">
+              <input type="number" placeholder="Quantity" name="Quantity" maxlength="30" size="25"  class="form-control" id="Quantity" required/>
+            </div>
+            </div>
+			</div>
+          <div class="row">
+		  <input type="file" name="Images" id="uploadimage" onchange="show_preview('preview1','uploadimage')" maxlength="100" size="130"/> 
+		  <img class="media-object" src="http://placehold.it/50x50" alt="" />
+		  </div>
+          
         
-        <label>Price:</label>
-        <input type="text" name="Price" required><br>
-
-        <label>Product_ID:</label>
-        <input type="text" name="Product_ID" required><br>
-
-        <label>Quantity:</label>
-        <input type="text" name="Quantity" required><br>
-
-
-        <div class="file">
-        <td>Images</td>
-        <td><img src="<?php echo $img1; ?>" alt="" id="preview1" /></td>
-        <td> <input type="file" name="Images" id="uploadimage" onchange="show_preview('preview1','uploadimage')" maxlength="100" size="130"/>        </td>
+        
+		
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              Sign up
+            </button>
+            <button type="button" onclick="window.location='CustomerLogin.php';" class="btn btn-primary btn-block mb-4">
+              Return
+            </button>
+            <!-- Register buttons -->
+            
+          </form>
+        </div>
       </div>
-		<input type="submit" value="submit" name="submit">
-
-	</form>
-	<br>
+    </div>
+  </div>
+</section>
 </body>
+
 </html>
