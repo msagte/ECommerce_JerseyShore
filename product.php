@@ -29,7 +29,7 @@ require 'config.php';
     </thead>
     <tbody>
         <?php
-        $query = "select * from product  order by Product_ID ";
+        $query = "SELECT P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id WHERE 1;";
         $res = mysqli_query($con, $query);
         $i = 1;
         while ($row = mysqli_fetch_assoc($res)) {
@@ -43,8 +43,8 @@ require 'config.php';
         <tr>
             <td><?php echo $i;?></td>
             <td><?php echo $row['Name'];?></td>
-            <td><?php echo $row['Brand'];?></td>
-            <td><?php echo $row['Category'];?></td>
+            <td><?php echo $row['Brand_Name'];?></td>
+            <td><?php echo $row['Category_Name'];?></td>
             <td><img src="Pictures/<?php echo $row['Images']; ?>" alt="product" width="200" height="200" /></td>
             <td align="center"><?php echo $row['Price'];?></td>
             <td align="center">
