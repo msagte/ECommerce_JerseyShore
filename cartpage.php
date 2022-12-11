@@ -22,10 +22,10 @@ if(!empty($_SESSION["shopping_cart"])) {
 if (isset($_REQUEST['Product_ID']) && $_REQUEST['Product_ID'] != "") 
 {
   $Product_ID = $_REQUEST['Product_ID'];
-  $result = mysqli_query($con,"SELECT * FROM `Product` WHERE `Product_ID`='$Product_ID'");
+  $result = mysqli_query($con,"SELECT P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id WHERE P.Product_ID='$Product_ID'");
   $row = mysqli_fetch_assoc($result);
   $Name = $row['Name'];
-  $Brand = $row['Brand'];
+  $Brand = $row['Brand_Name'];
   $Price = $row['Price'];
   $Product_ID = $row['Product_ID'];
   $Images = $row['Images'];
@@ -80,10 +80,13 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 </head>
     <title>Jersey Shore Furniture Cart</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div>
+    <img  src="pictures/HomeLogo.png" width='200' height='100' />
+   </div>
     <div class="container-fluid"></div>
     <div class="container-fluid"></div>
     <div class="container-fluid"></div>
-    <div class="container-fluid"></div>
+    
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
             aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +98,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                         <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.php">Insert Product</a>
+                        <a class="nav-link" href="product.php">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
@@ -103,8 +106,20 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                     <li class="nav-item">
                         <a class="nav-link" href="customerlogin.php">logout</a>
                     </li>
+                    </div>
+                    <div>
+                    <img  src="pictures/logout.png" href="customerlogin.php" width='30' height='30' />
+                    </div>
+                    <div>
+                    <img  src="pictures/Shoppingcart.png" width='30' height='30' /><span>  <?php
+                    if (isset($_POST["shopping_cart"])) {
+                      echo count(array_keys($_SESSION["shopping_cart"]));
+                    }
+?></span>
+                    </div>
+                   
                 </ul>
-            </div>
+            
         </div>
     </nav>
     
