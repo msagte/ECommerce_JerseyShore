@@ -95,13 +95,13 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                         <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Insert Product</a>
+                        <a class="nav-link" href="product.php">Insert Product</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">logout</a>
+                        <a class="nav-link" href="customerlogin.php">logout</a>
                     </li>
                 </ul>
             </div>
@@ -191,6 +191,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
   else 
 {
 	echo "<h3>Your cart is empty!</h3>";
+    exit;
 	}
 
           ?>
