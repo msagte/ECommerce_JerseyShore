@@ -81,7 +81,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
     <title>Jersey Shore Furniture Cart</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div>
-    <img  src="pictures/HomeLogo.png" width='200' height='100' />
+    <a class="nav-link" href="product.php"> <img  src="pictures/HomeLogo.png" width='200' height='100' /></a>
    </div>
     <div class="container-fluid"></div>
     <div class="container-fluid"></div>
@@ -103,12 +103,10 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="customerlogin.php">logout</a>
-                    </li>
+                    
                     </div>
                     <div>
-                    <img  src="pictures/logout.png" href="customerlogin.php" width='30' height='30' />
+                    <a class="nav-link" href="customerlogin.php"> <img  src="pictures/logout.png" href="customerlogin.php" width='30' height='30' /></a>
                     </div>
                     <div>
                     <img  src="pictures/Shoppingcart.png" width='30' height='30' /><span>  <?php
