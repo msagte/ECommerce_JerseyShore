@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2022 at 06:14 PM
+-- Generation Time: Dec 11, 2022 at 06:45 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -56,8 +56,26 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
-(1, 'Nike '),
-(2, 'Head');
+(1, 'Zecado'),
+(2, 'Carrybird'),
+(3, 'Urban Ladder'),
+(4, 'Home Canvas'),
+(5, 'Durian');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `p_title` varchar(1000) NOT NULL,
+  `p_image` varchar(1000) NOT NULL,
+  `p_price` varchar(1000) NOT NULL,
+  `p_qty` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -75,8 +93,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
-(1, 'Tennis '),
-(2, 'Golf');
+(1, 'Living'),
+(2, 'Outdoor'),
+(3, 'Dining'),
+(4, 'Study Area'),
+(5, 'Bedroom');
 
 -- --------------------------------------------------------
 
@@ -183,6 +204,12 @@ ALTER TABLE `brand`
   ADD PRIMARY KEY (`Brand_ID`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -238,13 +265,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customer`
