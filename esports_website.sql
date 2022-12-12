@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 06:45 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Dec 12, 2022 at 06:11 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,11 +56,8 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
-(1, 'Zecado'),
-(2, 'Carrybird'),
-(3, 'Urban Ladder'),
-(4, 'Home Canvas'),
-(5, 'Durian');
+(1, 'Nike '),
+(2, 'Head');
 
 -- --------------------------------------------------------
 
@@ -70,12 +67,18 @@ INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL,
-  `p_title` varchar(1000) NOT NULL,
-  `p_image` varchar(1000) NOT NULL,
-  `p_price` varchar(1000) NOT NULL,
-  `p_qty` int(11) NOT NULL
+  `cust_id` int(11) NOT NULL,
+  `Product_Id` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `cust_id`, `Product_Id`) VALUES
+(6, 2, 1),
+(7, 2, 8),
+(8, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -93,11 +96,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
-(1, 'Living'),
-(2, 'Outdoor'),
-(3, 'Dining'),
-(4, 'Study Area'),
-(5, 'Bedroom');
+(1, 'Indoor'),
+(2, 'Outdoor');
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`Cust_ID`, `First_Name`, `Last_Name`, `Email`, `Address`, `Phone_Number`, `Login_ID`, `Password`) VALUES
-(1, 'yamini', 'chitikela', 'yaminichitikela@gmail.com', '13frank', 551358542, 'yamini', 'e10adc3949ba59abbe56e057f20f883e');
+(1, 'yamini', 'chitikela', 'yaminichitikela@gmail.com', '13frank', 551358542, 'yamini', 'e10adc3949ba59abbe56e057f20f883e'),
+(2, 'Makarand', 'Agte', 'mack@email.com', '333 main str jersey nj 90909', 2147483647, 'mack', 'cfeb114b3fc6c4c1e23af6be9cc183e3');
 
 -- --------------------------------------------------------
 
@@ -138,6 +139,13 @@ CREATE TABLE `employee` (
   `Password` varchar(200) NOT NULL,
   `Is_Manager` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`Employee_ID`, `First_Name`, `Last_Name`, `Email`, `Login_ID`, `Password`, `Is_Manager`) VALUES
+(123434, 'Makarand', 'Agte', 'mack@mail.com', 'mack', 'cfeb114b3fc6c4c1e23af6be9cc183e3', 0);
 
 -- --------------------------------------------------------
 
@@ -185,7 +193,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Product_ID`, `Name`, `brand_id`, `Price`, `category_id`, `Quantity`, `Images`) VALUES
-(1, 'Product 1', 1, '123', 1, 3, 'pictures/bat.png');
+(1, 'Dinning Room Table', 1, '250', 1, 200, 'bat.png'),
+(4, 'Dressing table', 1, '900', 2, 100, 'bat.png'),
+(8, 'mackarand', 1, '234', 1, 23, '');
 
 --
 -- Indexes for dumped tables
@@ -207,7 +217,9 @@ ALTER TABLE `brand`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Cust_id` (`cust_id`),
+  ADD KEY `FK_Product_Id` (`Product_Id`);
 
 --
 -- Indexes for table `category`
@@ -265,25 +277,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orderdetail`
@@ -298,15 +310,28 @@ ALTER TABLE `orders`
   MODIFY `Order_ID` int(12) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `FK_Cust_id` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`Cust_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_Product_Id` FOREIGN KEY (`Product_Id`) REFERENCES `product` (`Product_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  ADD CONSTRAINT `Product_ID_FK` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order_ID_FK` FOREIGN KEY (`Order_ID`) REFERENCES `orders` (`Order_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `order_ID_FK` FOREIGN KEY (`Order_ID`) REFERENCES `orders` (`Order_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `product_ID_FK` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `orders`
