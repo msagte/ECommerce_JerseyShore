@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+
 
 unset($_SESSION['cuname']);
 if (isset($_POST['cuname'])) {

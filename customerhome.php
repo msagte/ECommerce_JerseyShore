@@ -22,7 +22,7 @@ if(isset($_POST["Login_ID"])) { // check if person submitted form
  
   
   // build sql
-	$sql = "SELECT First_Name,Last_Name FROM Customer WHERE Login_ID='".$Login_ID."' AND Password='".$Password."' ";
+	$sql = "SELECT Cust_ID,First_Name,Last_Name FROM Customer WHERE Login_ID='".$Login_ID."' AND Password='".$Password."' ";
    //var_dump($sql); 
   
   // run sql
@@ -36,9 +36,12 @@ if(isset($_POST["Login_ID"])) { // check if person submitted form
           $row = mysqli_fetch_array($result); // save results to $row
           $First_Name = $row['First_Name'];
           $Last_Name = $row['Last_Name'];
-          
+          $_SESSION["CustID"] =  $row['Cust_ID'];
 		  // show user that is logged in          
           echo $First_Name; echo "&nbsp"; echo $Last_Name;
+         
+       //   echo "<script> location.href='product.php'; </script>";
+       //   exit(); 
         } else {
               // redirect to error screen
               header("Location: CustomerLogin.php?error=true");
@@ -89,7 +92,7 @@ a:hover, a:active {
       
       <table border = "0" cellpadding="10" cellspacing="10" class="center" height="325px"  style="width:100%">
      <tr>
-         <td> <a href="product.php" ><p>Products</p> </a> </td>
+         <td> <a href="product.php?CustID=<?php echo $_SESSION['CustID'] ?>" ><p>Products</p> </a> </td>
          <td>  <a href="cartpage.php" ><p>Cart Page</p> </a> </td>
      </tr>    
      
@@ -99,7 +102,6 @@ a:hover, a:active {
      </tr>
 
 </table>
-
 </body>
 </html>
 
