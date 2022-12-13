@@ -10,7 +10,7 @@ if(!isset($_GET["CustID"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Cart</title>
+    <title>Jersey Shore Furniture Products</title>
     
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -21,11 +21,12 @@ if(!isset($_GET["CustID"])){
 
       
 </head>
-    <title>Jersey Shore Furniture Products</title>
+   
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div>
     <a class="nav-link"> <img  src="pictures/HomeLogo.png" width='200' height='100' /></a>
    </div>
+   
     <div class="container-fluid"></div>
     <div class="container-fluid"></div>
     <div class="container-fluid"></div>
@@ -68,50 +69,119 @@ if(!isset($_GET["CustID"])){
         <div class="py-2 border-bottom ml-3">
             <h3 class="font-weight-bold">Categories</h3>
             <div id="orange"><span class="fa fa-minus"></span></div>
-            <form>
-                <?php 
-            // Connect to database
+            <div>
+            <form method="POST" action="product.php?CustID=<?php echo $_GET['CustID'] ?>">
+                <?php
+              
+                // Connect to database
                 $con = mysqli_connect("localhost","root","","esports_website");
 
                 // Get all the categories from category table
                 $sql = "SELECT * FROM category";
-                    $sqls = "SELECT * FROM brand";
-            $all_categories = mysqli_query($con,$sql);
-            $all_brands = mysqli_query($con, $sqls);
+                $sqls = "SELECT * FROM brand";
+                $all_categories = mysqli_query($con,$sql);
+                $all_brands = mysqli_query($con, $sqls);
 
-            while ($category = mysqli_fetch_array(
+                while ($category = mysqli_fetch_array(
                 $all_categories,MYSQLI_ASSOC)):;
+
+                    if (!empty($_POST['categories'])) {
+                        foreach ($_POST['categories'] as $catscheckbox) {
+                            if ($category["Category_ID"] == $catscheckbox)
+                                $catschecked = "checked";
+                            else
+                                $catschecked = "";
+                        }
+                    }
                  ?> 
                 <div class="form-group">
-                <input type="checkbox" id="<?php echo $category["Category_ID"];?>">
+                <input type="checkbox"  value="<?php echo $category["Category_ID"];?>" name="categories[]" 
+                <?php if(isset($catschecked)) {
+                        echo $catschecked; } 
+                ?>>                
                 <label for="breakfast"><?php echo $category["Category_Name"];?></label>
                 </div>
                 <?php
-				    endwhile;?>                                            
-            </form>
-        </div>
-            <div class="py-2 border-bottom ml-3">
-            <h3 class="font-weight-bold">Brands</h3>
-            <div id="orange"><span class="fa fa-minus"></span></div>
-        <form>
-            <?php while ($brand = mysqli_fetch_array(
-            $all_brands,MYSQLI_ASSOC)):; ?>
-            <div class="form-group">
-                <input type="checkbox" id="<?php echo $brand["Brand_ID"];?>">
+                    
+				    endwhile;
+                    
+                    
+                    //echo $("input[type=checkbox][name=brands]:checked").val();
+                    
+                    ?>                                            
+            
+               
+       
+                <div class="py-2 border-bottom ml-3">
+                <h3 class="font-weight-bold">Brands</h3>
+                <div id="orange"><span class="fa fa-minus"></span></div>
+       
+                <?php while ($brand = mysqli_fetch_array(
+                $all_brands,MYSQLI_ASSOC)):; 
+                
+                if (!empty($_POST['brands'])) {
+                    foreach ($_POST['brands'] as $brandcheckbox) {
+                       if($brand["Brand_ID"]== $brandcheckbox)
+                        $brandschecked= "checked";
+                    else
+                        $brandschecked= "";
+                    }
+                    
+                }
+                ?>
+                <div class="form-group">
+                <input type="checkbox"  value="<?php echo $brand["Brand_ID"];?>" name="brands[]" 
+                <?php if(isset($brandschecked)) {
+                        echo $brandschecked; } 
+                ?>>
+                
                 <label for="tea"><?php echo $brand["Brand_Name"];?></label>
-            </div>
+                
+                </div>
                                          
-            <?php
+                <?php
 				endwhile;?>     
-        </form>
-        </div>
-    
+                
+                <input type ="text" name ="temp" value="5" />
+                </div>
+                
+                <button type="submit"  id="btn_click"  class="btn btn-primary btn-lg btn-block">
+                Apply
+                </button>
+                </div>
+                </form>
     </section>
     
 </section>
-<form>
+
 <?php
-        $query = "SELECT P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id WHERE 1;";
+if (!empty($_POST['brands'])) {
+    // Loop to store and display values of individual checked checkbox.
+    foreach ($_POST['brands'] as $selected) {
+        $brandvals = rtrim($selected, ",");
+    }
+}
+if (!empty($_POST['categories'])) {
+    // Loop to store and display values of individual checked checkbox.
+    foreach ($_POST['categories'] as $selected) {
+        $catvals = rtrim($selected, ",");
+    }
+}
+    //    echo "<script>alert('Hi' </script>"
+        $wheres[]  =' 1';
+        if(!empty($brandvals))
+        {
+            $wheres[] = 'P.brand_id in(' . $brandvals .')';
+            
+        }
+        if(!empty($catvals))
+        {
+            $wheres[] = 'P.category_id in(' . $catvals .')';
+            
+        }
+        $wheres = implode(" AND ", $wheres);
+
+        $query = "SELECT P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id WHERE $wheres;";
         $res = mysqli_query($con, $query);
         $total_rows = mysqli_num_rows($res);
         $i = 1; 
@@ -177,7 +247,7 @@ if(!isset($_GET["CustID"])){
             </div>
         </div>    
     </section>
-    </form>
+    
 
 
 <div class="message_box" style="margin:10px 0px;">
