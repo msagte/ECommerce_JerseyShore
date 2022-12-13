@@ -49,12 +49,15 @@ if (isset($_GET['CustID']) && $_GET['CustID'] != "") {
   }
   $_SESSION["shopping_cart"] = $cartArrays;
   if (isset($_POST['action']) && $_POST['action'] == "change") {
-    $ids= $_POST['quantity'];
+    $ids= $_POST['Product_ID'];
+    $quants = $_POST["quantity"];
+    $k=0;
     foreach ($_SESSION["shopping_cart"] as &$value) {
-      if ($value[0] === $_POST["Product_ID"]) {
-        $value['quantity'] = $_POST["quantity"];
+      if ($value[0] === $ids[$k]) {
+        $value['quantity'] = $quants[$k];
         break; // Stop the loop after we've found the product
       }
+      $k += 1;
     }
 
   }
@@ -162,6 +165,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <!-- Single item -->
             <?php
     $j = 0;
+    $total_price = 0;
     foreach ($_SESSION["shopping_cart"] as $product) {
      
             ?>
@@ -194,15 +198,16 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                 <?php
                    $quantity = 1;
       if (isset($_POST["quantity"])) {
+        $prodids = $_POST['Product_ID'];
         $quantities = $_POST['quantity'];
-        if ($product[0] == $_POST['Product_ID'])
+        if ($product[0] == $prodids[$j])
           $quantity = $quantities[$j];
       }
                   
                 ?>
 
                     <div class="form-outline">
-                    <input type='hidden' name='Product_ID' value="<?php echo $product[0]; ?>" />
+                    <input type='hidden' name='Product_ID[]' value="<?php echo $product[0]; ?>" />
                     <input type='hidden' name='action' value="change" />
                     <input id="form1" min="0" name="quantity[]" value="<?php echo $quantity; ?>" 
                        type="number" class="form-control" onchange="this.form.submit" />
@@ -219,11 +224,11 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
               </div>
             </div>
             <?php
-      $total_price += ($product[3]);
+     
       $j += 1;
-    //  if (isset($_POST["quantity"])) {
-     //   $total_price += ($product[3] * $_POST["quantity"]);
-      //}
+      if (!empty($quantity)) {
+       $total_price += ($product[3] * $quantity);
+      }
     }
   }
   else 
