@@ -142,7 +142,6 @@ if(!isset($_GET["CustID"])){
                 <?php
 				endwhile;?>     
                 
-                <input type ="text" name ="temp" value="5" />
                 </div>
                 
                 <button type="submit"  id="btn_click"  class="btn btn-primary btn-lg btn-block">
