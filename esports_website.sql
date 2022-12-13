@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 06:11 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Dec 13, 2022 at 07:44 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,8 +56,11 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
-(1, 'Nike '),
-(2, 'Head');
+(1, 'BONALDO'),
+(2, 'GAMMA'),
+(3, 'CATTELAN'),
+(4, 'SANGIACOMO'),
+(5, 'FIAM');
 
 -- --------------------------------------------------------
 
@@ -97,7 +100,10 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
 (1, 'Indoor'),
-(2, 'Outdoor');
+(2, 'Outdoor'),
+(3, 'Dining'),
+(4, 'Study'),
+(5, 'Bedroom');
 
 -- --------------------------------------------------------
 
@@ -195,7 +201,8 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`Product_ID`, `Name`, `brand_id`, `Price`, `category_id`, `Quantity`, `Images`) VALUES
 (1, 'Dinning Room Table', 1, '250', 1, 200, 'bat.png'),
 (4, 'Dressing table', 1, '900', 2, 100, 'bat.png'),
-(8, 'mackarand', 1, '234', 1, 23, '');
+(8, 'mackarand', 1, '234', 1, 23, ''),
+(9, 'sofa set', 1, '123', 1, 2, 'OUTDOOR CHAIR 2.png');
 
 --
 -- Indexes for dumped tables
@@ -277,7 +284,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -289,7 +296,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -313,7 +320,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
