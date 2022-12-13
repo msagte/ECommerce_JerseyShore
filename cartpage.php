@@ -19,35 +19,45 @@ if(!empty($_SESSION["shopping_cart"])) {
 			}		
 		}
 }
-if (isset($_REQUEST['Product_ID']) && $_REQUEST['Product_ID'] != "") 
-{
-  $Product_ID = $_REQUEST['Product_ID'];
-  $result = mysqli_query($con,"SELECT P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id WHERE P.Product_ID='$Product_ID'");
-  $row = mysqli_fetch_assoc($result);
-  $Name = $row['Name'];
-  $Brand = $row['Brand_Name'];
-  $Price = $row['Price'];
-  $Product_ID = $row['Product_ID'];
-  $Images = $row['Images'];
-  
-  $cartArray = array(
-    $Product_ID=>array(
-    'Name'=>$Name,
-    'Price'=>$Price,
-    'Product_ID'=>$Product_ID,
-    'Images'=>$Images)
-  );
-  $_SESSION["shopping_cart"] = $cartArray;
-}
 
-if (isset($_POST['action']) && $_POST['action']=="change"){
-  foreach($_SESSION["shopping_cart"] as &$value){
-    if($value['Product_ID'] === $_POST["Product_ID"]){
+
+if (isset($_GET['CustID']) && $_GET['CustID'] != "") {
+  $Cust_ID = $_GET['CustID'];
+  //$Product_ID = $_REQUEST['Product_ID'];
+  $result = mysqli_query($con, "SELECT distinct P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id
+      INNER JOIN Cart Ct on Ct.Product_Id = p.Product_ID  WHERE CT.cust_id ='$Cust_ID'");
+       $cartArrays =  $result->fetch_all();
+  while ($row = mysqli_fetch_assoc($result)) {
+    //$row = mysqli_fetch_assoc($result);
+    $Name = $row['Name'];
+    $Brand = $row['Brand_Name'];
+    $Price = $row['Price'];
+    $Product_ID = $row['Product_ID'];
+    $Images = $row['Images'];
+
+
+   
+    $cartArray = array(
+      $Product_ID => array(
+        'Name' => $Name,
+        'Price' => $Price,
+        'Product_ID' => $Product_ID,
+        'Images' => $Images
+      )
+    );
+   // $cartArrays = $cartArray;
+  }
+  $_SESSION["shopping_cart"] = $cartArrays;
+  if (isset($_POST['action']) && $_POST['action'] == "change") {
+    $ids= $_POST['quantity'];
+    foreach ($_SESSION["shopping_cart"] as &$value) {
+      if ($value[0] === $_POST["Product_ID"]) {
         $value['quantity'] = $_POST["quantity"];
         break; // Stop the loop after we've found the product
+      }
     }
-}
-  	
+
+  }
 }
 ?>
 <html>
@@ -98,7 +108,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                         <a class="nav-link" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.php">Products</a>
+                        <a class="nav-link" href="product.php?CustID=<?php echo $_GET['CustID']?>">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
@@ -113,7 +123,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                     if (isset($_POST["shopping_cart"])) {
                       echo count(array_keys($_SESSION["shopping_cart"]));
                     }
-?></span>
+          ?></span>
                     </div>
                    
                 </ul>
@@ -122,7 +132,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
     </nav>
     
 <section class="h-100 gradient-custom">
-<form method="post" action="cartpage.php">
+<form method="post" action="cartpage.php?CustID=<?php echo $_GET['CustID']?>">
   <div class="container py-5">
   <?php 
   if (isset($_POST["shopping_cart"])) {
@@ -130,9 +140,9 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 
 ?>
 
-<span><?php echo $cart_count; ?></span></a>
+ <span><?php echo $cart_count; ?></span></a>
 
-<?php
+ <?php
   }
 
   if (isset($_SESSION["shopping_cart"])) {
@@ -146,19 +156,21 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <h5 class="mb-0">Cart - <?php 
   echo count(array_keys($_SESSION["shopping_cart"]));
     
-?> item/s</h5>
+ ?> item/s</h5>
           </div>
           <div class="card-body">
             <!-- Single item -->
             <?php
+    $j = 0;
     foreach ($_SESSION["shopping_cart"] as $product) {
+     
             ?>
             <div class="row">
               <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                 <!-- Image -->
                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                  <img src="pictures/<?php echo $product["Images"]; ?>"
-                    class="w-100" alt=<?php echo $product["Name"]; ?> />
+                  <img src="pictures/<?php echo $product[6]; ?>"
+                    class="w-100" alt=<?php echo $product[2] ." " . $product[1]; ?> />
                   <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                   </a>
@@ -168,9 +180,9 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 
               <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                 <!-- Data -->
-                <p><strong><?php echo $product["Name"]; ?></strong></p>
-                <p>Price: $<?php echo $product["Price"]; ?></p>
-                
+                <p><strong><?php  echo $product[2] ." " .  $product[1]; ?></strong></p>
+                <p>Price: $<?php echo $product[3]; ?></p>
+                <p>Category: <?php echo $product[4]; ?></p>
                
                 <!-- Data -->
               </div>
@@ -179,11 +191,20 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                 <!-- Quantity -->
                 <div class="d-flex mb-4" style="max-width: 300px">
                 
-          
+                <?php
+                   $quantity = 1;
+      if (isset($_POST["quantity"])) {
+        $quantities = $_POST['quantity'];
+        if ($product[0] == $_POST['Product_ID'])
+          $quantity = $quantities[$j];
+      }
+                  
+                ?>
+
                     <div class="form-outline">
-                    <input type='hidden' name='Product_ID' value="<?php echo $product["Product_ID"]; ?>" />
+                    <input type='hidden' name='Product_ID' value="<?php echo $product[0]; ?>" />
                     <input type='hidden' name='action' value="change" />
-                    <input id="form1" min="0" name="quantity" value="<?php echo $product["quantity"]; ?>" 
+                    <input id="form1" min="0" name="quantity[]" value="<?php echo $quantity; ?>" 
                        type="number" class="form-control" onchange="this.form.submit" />
                     <label class="form-label" for="form1">Quantity</label>
                   </div>
@@ -197,12 +218,16 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                 <!-- Price -->
               </div>
             </div>
-            <?php 
-      $total_price += ($product["Price"] * $product["quantity"]  );
+            <?php
+      $total_price += ($product[3]);
+      $j += 1;
+    //  if (isset($_POST["quantity"])) {
+     //   $total_price += ($product[3] * $_POST["quantity"]);
+      //}
     }
   }
   else 
-{
+ {
 	echo "<h3>Your cart is empty!</h3>";
     exit;
 	}
@@ -220,7 +245,11 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
           <div class="card-body">
             <p><strong>Expected shipping delivery</strong></p>
             <p class="mb-0"><script> var date = new Date(); date.setDate(date.getDate() + 2); document.write(date.toLocaleDateString());           
-</script></p>
+  </script></p>
+             <button type="submit" id="btnCalc" class="btn btn-primary btn-lg btn-block">
+              Calculate
+            </button>
+
           </div>
         </div>       
       </div>
