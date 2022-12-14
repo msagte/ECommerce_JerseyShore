@@ -118,7 +118,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                     <a class="nav-link" href="customerlogin.php"> <img  src="pictures/logout.png" href="customerlogin.php" width='30' height='30' /></a>
                     </div>
                     <div>
-                    <a class="nav-link" href="cartpage.php?CustID=<?php echo $_GET['CustID']?>"><img  src="pictures/Shoppingcart.png" href="cartpage.php?Cust_ID=<?php echo $_SESSION['CustID'] ?>" width='30' height='30' /></a><span>  <?php
+                    <a class="nav-link" href="cartpage.php?CustID=<?php echo $_SESSION['CustID']?>"><img  src="pictures/Shoppingcart.png" href="cartpage.php?Cust_ID=<?php echo $_SESSION['CustID'] ?>" width='30' height='30' /></a><span>  <?php
                     if (isset($_POST["shopping_cart"])) {
                       echo count(array_keys($_SESSION["shopping_cart"]));
                     }
@@ -129,13 +129,14 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             
         </div>
     </nav>
+    <?php if (isset($_SESSION['OrderID']) && !empty($_SESSION['OrderID'])) { ?>
 <section class="h-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-10 col-xl-8">
         <div class="card" style="border-radius: 10px;">
           <div class="card-header px-4 py-5">
-            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;"><?php echo $_SESSION['fullName']?></span>!</h5>
+            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;"><?php echo $_SESSION['fullName'] ?></span>!</h5>
           </div>
           <div class="card-body p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -144,45 +145,45 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             </div>
             <div class="card shadow-0 border mb-4">
               <div class="card-body">
-            <?php 
-            
-            $res1 = "select DISTINCT CONCAT(b.Brand_Name , ' ' , p.Name , ' ' ,  Ct.Category_Name) as 'Name',P.Price,P.Images,OD.quantity,O.invoicenumber,O.orderdate  FROM orders O INNER JOIN orderdetail OD ON O.Order_ID = OD.Order_ID  INNER JOIN product P on P.Product_ID = OD.Product_ID  INNER JOIN brand B ON B.Brand_ID = P.brand_id   INNER JOIN category Ct on Ct.Category_ID = p.category_id WHERE O.cust_id=" .  $_SESSION['CustID'] ." AND O.Order_ID = " . $_SESSION['OrderID'];
-            $query_result = mysqli_query($con, $res1);
+            <?php
 
-            $total_price = 0;
+      $res1 = "select DISTINCT CONCAT(b.Brand_Name , ' ' , p.Name , ' ' ,  Ct.Category_Name) as 'Name',P.Price,P.Images,OD.quantity,O.invoicenumber,O.orderdate  FROM orders O INNER JOIN orderdetail OD ON O.Order_ID = OD.Order_ID  INNER JOIN product P on P.Product_ID = OD.Product_ID  INNER JOIN brand B ON B.Brand_ID = P.brand_id   INNER JOIN category Ct on Ct.Category_ID = p.category_id WHERE O.cust_id=" . $_SESSION['CustID'] . " AND O.Order_ID = " . $_SESSION['OrderID'];
+      $query_result = mysqli_query($con, $res1);
 
-            while ($row = mysqli_fetch_assoc($query_result)) {
+      $total_price = 0;
+
+      while ($row = mysqli_fetch_assoc($query_result)) {
 
 
 
-             
-            
-            
+
+
+
             ?>
 
                 <div class="row">
                   <div class="col-md-2" aria-colspan="2">
-                    <img src="pictures/<?php echo $row['Images']?>"
+                    <img src="pictures/<?php echo $row['Images'] ?>"
                       class="img-fluid" alt="">
                   </div>                  
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small"><?php echo $row['Name']?></p>
+                    <p class="text-muted mb-0 small"><?php echo $row['Name'] ?></p>
                   </div>
                  
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small">Qty: <?php echo $row['quantity']?></p>
+                    <p class="text-muted mb-0 small">Qty: <?php echo $row['quantity'] ?></p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small">Invoice Date:<?php echo $row['orderdate']?></p>
+                    <p class="text-muted mb-0 small">Invoice Date:<?php echo $row['orderdate'] ?></p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small">$<?php echo $row['Price']?></p>
+                    <p class="text-muted mb-0 small">$<?php echo $row['Price']*$row['quantity']  ?></p>
                   </div>
                 </div>
-                <?php 
-                $total_price = $total_price +  $row['Price'];
-                $inv_number =  $row['invoicenumber'];
-                }  
+                <?php
+        $total_price = $total_price + ($row['Price']*$row['quantity']);
+        $inv_number = $row['invoicenumber'];
+      }
                 ?>
                 <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                 <div class="row d-flex align-items-center">
@@ -208,15 +209,15 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <div class="d-flex justify-content-between pt-2">
               <p class="fw-bold mb-0">Order Details</p>
               <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $<?php if (!empty($total_price))
-                echo $total_price;
-              else
-                echo 0; ?></p>
+        echo $total_price;
+      else
+        echo 0; ?></p>
             </div>
 
             <div class="d-flex justify-content-between pt-2">
              
-              <p class="text-muted mb-0">Invoice Number :  <?php               
-              echo $inv_number;
+              <p class="text-muted mb-0">Invoice Number :  <?php
+      echo $inv_number;
               ?></p>             
             </div>
 
@@ -234,14 +235,18 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
               paid: <span class="h2 mb-0 ms-2">$<?php if (!empty($total_price))
-                echo $total_price + 5;
-              else
-                echo 0; ?></span></h5>
+        echo $total_price + 5;
+      else
+        echo 0; ?></span></h5>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<?php }
+
+
+?>
 </body>
 </html>

@@ -298,7 +298,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
               </li>
             </ul>
             <div>
-            <a class="nav-link" href="orderhistory.php?CustID=<?php echo $_GET['CustID']?>"><button type="button" class="btn btn-primary btn-lg btn-block">
+            <a class="nav-link" href="Receipt.php?CustID=<?php echo $_GET['CustID']?>"><button type="button" class="btn btn-primary btn-lg btn-block">
               Place Order
             </button></a>
             </div>

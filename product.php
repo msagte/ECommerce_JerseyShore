@@ -53,7 +53,7 @@ if(!isset($_GET["CustID"])){
                     <a class="nav-link" href="customerlogin.php"> <img  src="pictures/logout.png" href="customerlogin.php" width='30' height='30' /></a>
                     </div>
                     <div>
-                    <a class="nav-link" href="cartpage.php?CustID=<?php echo $_GET['CustID']?>"><img  src="pictures/Shoppingcart.png" href="cartpage.php?Cust_ID=<?php echo $_SESSION['CustID'] ?>" width='30' height='30' /></a><span>  <?php
+                    <a class="nav-link" href="cartpage.php?CustID=<?php echo $_GET['CustID']?>"><img  src="pictures/Shoppingcart.png" href="cartpage.php?Cust_ID=<?php echo $_GET['CustID'] ?>" width='30' height='30' /></a><span>  <?php
                     if (isset($_POST["shopping_cart"])) {
                       echo count(array_keys($_SESSION["shopping_cart"]));
                     }?>
