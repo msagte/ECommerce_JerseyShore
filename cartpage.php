@@ -166,6 +166,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <?php
     $j = 0;
     $total_price = 0;
+    $newCartArray = array();
     foreach ($_SESSION["shopping_cart"] as $product) {
      
             ?>
@@ -225,11 +226,22 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             </div>
             <?php
      
-      $j += 1;
+      
       if (!empty($quantity)) {
        $total_price += ($product[3] * $quantity);
       }
+      $cartArray = array(
+       $j => array(
+          'Product_ID' => $product[0],
+          'Price' => $product[3],
+          'quantity' => $quantity
+        )
+      );
+      $j += 1;
+       $newCartArray[] = $cartArray;
     }
+    $_SESSION['cartArray'] = $newCartArray;
+
   }
   else 
  {
@@ -285,10 +297,11 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                 <span><strong>$<?php echo number_format($total_price + 5, 2, '.', ''); ?></strong></span>
               </li>
             </ul>
-
-            <button type="button" class="btn btn-primary btn-lg btn-block">
-              Go to checkout
-            </button>
+            <div>
+            <a class="nav-link" href="orderhistory.php?CustID=<?php echo $_GET['CustID']?>"><button type="button" class="btn btn-primary btn-lg btn-block">
+              Place Order
+            </button></a>
+            </div>
           </div>
         </div>
       </div>

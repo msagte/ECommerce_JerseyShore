@@ -39,7 +39,7 @@ if(isset($_POST["Login_ID"])) { // check if person submitted form
           $_SESSION["CustID"] =  $row['Cust_ID'];
 		  // show user that is logged in          
           echo $First_Name; echo "&nbsp"; echo $Last_Name;
-         
+      $_SESSION['fullName'] = $First_Name . " " . $Last_Name;
        //   echo "<script> location.href='product.php'; </script>";
        //   exit(); 
         } else {
@@ -93,7 +93,7 @@ a:hover, a:active {
       <table border = "0" cellpadding="10" cellspacing="10" class="center" height="325px"  style="width:100%">
      <tr>
          <td> <a href="product.php?CustID=<?php echo $_SESSION['CustID'] ?>" ><p>Products</p> </a> </td>
-         <td>  <a href="cartpage.php" ><p>Cart Page</p> </a> </td>
+         <td>  <a href="cartpage.php?CustID=<?php echo $_SESSION['CustID'] ?>" ><p>Cart Page</p> </a> </td>
      </tr>    
      
      <tr>
