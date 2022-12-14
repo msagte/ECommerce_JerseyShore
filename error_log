@@ -2,12 +2,12 @@
 [08-Nov-2021 16:57:23 UTC] PHP Parse error:  syntax error, unexpected 'H' (T_STRING), expecting ',' or ';' in /home/grammaa2/public_html/FirstScript.php on line 14
 [08-Nov-2021 16:57:50 UTC] PHP Parse error:  syntax error, unexpected 'H' (T_STRING), expecting ',' or ';' in /home/grammaa2/public_html/FirstScript.php on line 14
 [08-Nov-2021 16:57:52 UTC] PHP Parse error:  syntax error, unexpected 'H' (T_STRING), expecting ',' or ';' in /home/grammaa2/public_html/FirstScript.php on line 14
-[21-Nov-2021 18:02:22 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/db_conn.php on line 11
+[21-Nov-2021 18:02:22 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/db_conn.php on line 11
 [21-Nov-2021 18:02:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/grammaa2/public_html/db_conn.php:15) in /home/grammaa2/public_html/login.php on line 27
-[21-Nov-2021 18:05:34 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/db_conn.php on line 11
+[21-Nov-2021 18:05:34 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/db_conn.php on line 11
 [21-Nov-2021 18:05:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/grammaa2/public_html/db_conn.php:15) in /home/grammaa2/public_html/login.php on line 27
-[21-Nov-2021 18:22:55 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:23:14 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:22:55 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:23:14 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
 [21-Nov-2021 18:26:09 UTC] PHP Warning:  include(config.php): failed to open stream: No such file or directory in /home/grammaa2/public_html/index.php on line 2
 [21-Nov-2021 18:26:09 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/grammaa2/public_html/index.php on line 2
 [21-Nov-2021 18:27:01 UTC] PHP Warning:  include(config.php): failed to open stream: No such file or directory in /home/grammaa2/public_html/index.php on line 2
@@ -30,14 +30,14 @@
 [21-Nov-2021 18:27:42 UTC] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home/grammaa2/public_html/index.php on line 8
 [21-Nov-2021 18:27:44 UTC] PHP Warning:  include(config.php): failed to open stream: No such file or directory in /home/grammaa2/public_html/index.php on line 2
 [21-Nov-2021 18:27:44 UTC] PHP Warning:  include(): Failed opening 'config.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home/grammaa2/public_html/index.php on line 2
-[21-Nov-2021 18:33:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:34:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:34:53 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:36:23 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:37:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:37:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:40:47 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
-[21-Nov-2021 18:42:12 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'esports_website' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:33:39 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:34:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:34:53 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:36:23 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:37:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:37:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:40:47 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
+[21-Nov-2021 18:42:12 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'root'@'localhost' to database 'jerseyshoredb' in /home/grammaa2/public_html/config.php on line 8
 [21-Nov-2021 18:46:09 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/grammaa2/public_html/page.php on line 15
 [21-Nov-2021 18:48:20 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/grammaa2/public_html/page.php on line 15
 [21-Nov-2021 18:54:48 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/grammaa2/public_html/page.php on line 15

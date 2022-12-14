@@ -3,7 +3,7 @@ session_start ();
 $hostName= 'localhost';
 $authName= 'root';
 $pass='';
-$dbname= 'esports_website';
+$dbname= 'jerseyshoredb';
 
 $conn=new mysqli($hostName,$authName,$pass,$dbname);
 

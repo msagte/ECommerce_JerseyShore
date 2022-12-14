@@ -48,7 +48,7 @@ require 'config.php';
             <form>
                 <?php 
             // Connect to database
-                $con = mysqli_connect("localhost","root","","esports_website");
+                $con = mysqli_connect("localhost","root","","jerseyshoredb");
 
                 // Get all the categories from category table
                 $sql = "SELECT * FROM category";

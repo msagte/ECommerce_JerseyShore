@@ -28,7 +28,7 @@
     
   }
 
-  @ $db = new mysqli('localhost', 'root', '', 'esports_website');
+  @ $db = new mysqli('localhost', 'root', '', 'jerseyshoredb');
 
   if (mysqli_connect_errno()) {
      echo "Error: Could not connect to database.  Please try again later.";

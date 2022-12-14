@@ -318,7 +318,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 $host = "localhost"; /* Host name */
 $user = "root"; /* User */
 $password = ""; /* Password */
-$dbname = "esports_website"; /* Database name */
+$dbname = "jerseyshoredb"; /* Database name */
 $con = mysqli_connect($host, $user, $password,$dbname);
 mysqli_close($con);?></div>
 

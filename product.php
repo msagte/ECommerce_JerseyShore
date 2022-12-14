@@ -79,7 +79,7 @@ if(!isset($_GET["CustID"])){
                 <?php
               
                 // Connect to database
-                $con = mysqli_connect("localhost","root","","esports_website");
+                $con = mysqli_connect("localhost","root","","jerseyshoredb");
 
                 // Get all the categories from category table
                 $sql = "SELECT * FROM category";
@@ -265,7 +265,7 @@ if (!empty($_POST['categories'])) {
 $host = "localhost"; /* Host name */
 $user = "root"; /* User */
 $password = ""; /* Password */
-$dbname = "esports_website"; /* Database name */
+$dbname = "jerseyshoredb"; /* Database name */
 $con = mysqli_connect($host, $user, $password,$dbname);
 mysqli_close($con);?></div>
 

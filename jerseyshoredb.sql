@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2022 at 07:44 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Dec 14, 2022 at 10:50 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `esports_website`
+-- Database: `jerseyshoredb`
 --
 
 -- --------------------------------------------------------
@@ -56,11 +56,11 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
-(1, 'BONALDO'),
-(2, 'GAMMA'),
-(3, 'CATTELAN'),
-(4, 'SANGIACOMO'),
-(5, 'FIAM');
+(1, 'Ashley'),
+(2, 'Ethan Allen'),
+(3, 'Crate & Barrel'),
+(4, 'West Elm'),
+(5, 'Wayfair');
 
 -- --------------------------------------------------------
 
@@ -73,15 +73,6 @@ CREATE TABLE `cart` (
   `cust_id` int(11) NOT NULL,
   `Product_Id` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `cust_id`, `Product_Id`) VALUES
-(6, 2, 1),
-(7, 2, 8),
-(8, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -99,11 +90,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
-(1, 'Indoor'),
-(2, 'Outdoor'),
-(3, 'Dining'),
-(4, 'Study'),
-(5, 'Bedroom');
+(1, 'Bedroom Furniture'),
+(2, 'Dinning Room'),
+(3, 'Patio'),
+(4, 'Storage'),
+(5, 'Family Room');
 
 -- --------------------------------------------------------
 
@@ -167,6 +158,24 @@ CREATE TABLE `orderdetail` (
   `Price` decimal(12,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `orderdetail`
+--
+
+INSERT INTO `orderdetail` (`Order_Detail_ID`, `Order_ID`, `Product_ID`, `quantity`, `Price`) VALUES
+(49, 21, 1, 4, '250'),
+(50, 21, 4, 1, '900'),
+(51, 21, 8, 1, '234'),
+(52, 22, 1, 4, '250'),
+(53, 22, 4, 1, '900'),
+(54, 22, 8, 1, '234'),
+(55, 23, 1, 1, '250'),
+(56, 23, 4, 2, '900'),
+(57, 24, 1, 1, '250'),
+(58, 24, 8, 1, '234'),
+(59, 24, 10, 1, '1200'),
+(60, 24, 9, 2, '2300');
+
 -- --------------------------------------------------------
 
 --
@@ -175,8 +184,20 @@ CREATE TABLE `orderdetail` (
 
 CREATE TABLE `orders` (
   `Order_ID` int(12) NOT NULL,
-  `Cust_ID` int(12) NOT NULL
+  `Cust_ID` int(12) NOT NULL,
+  `orderdate` date NOT NULL,
+  `invoicenumber` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`Order_ID`, `Cust_ID`, `orderdate`, `invoicenumber`) VALUES
+(21, 2, '2022-12-14', 81047),
+(22, 2, '2022-12-14', 26751),
+(23, 2, '2022-12-14', 57947),
+(24, 2, '2022-12-14', 53638);
 
 -- --------------------------------------------------------
 
@@ -199,10 +220,12 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Product_ID`, `Name`, `brand_id`, `Price`, `category_id`, `Quantity`, `Images`) VALUES
-(1, 'Dinning Room Table', 1, '250', 1, 200, 'bat.png'),
-(4, 'Dressing table', 1, '900', 2, 100, 'bat.png'),
-(8, 'mackarand', 1, '234', 1, 23, ''),
-(9, 'sofa set', 1, '123', 1, 2, 'OUTDOOR CHAIR 2.png');
+(1, 'Coffee Table', 4, '250', 2, 164, 'COFFEE TABEL 2.png'),
+(4, 'Hammock', 3, '900', 3, 80, 'HAMMOCK 1.png'),
+(8, 'mackarand', 1, '234', 1, 6, 'DINNIG CHAIR 2.png'),
+(9, 'King Size Bed', 1, '2300', 1, 98, 'BED 1.png'),
+(10, 'Dining Table with Chair', 2, '1200', 2, 99, 'DINNIG CHAIR 1.png'),
+(11, 'Outdoor patio Sofa', 5, '490', 3, 100, 'OUTDOOR CHAIR 1.png');
 
 --
 -- Indexes for dumped tables
@@ -290,7 +313,7 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -308,19 +331,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `Order_Detail_ID` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `Order_Detail_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Order_ID` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `Order_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

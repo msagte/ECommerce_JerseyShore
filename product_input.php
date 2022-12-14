@@ -88,7 +88,7 @@ if ($bdefined == true) {
   $query = "insert into Product (Name,Brand,Price,Product_ID,Category,Quantity,Images) values
   ('" . $Name . "', '" . $Brand . "', '" . $Price . "','" . $Product_ID . "', '" . $Category . "','" . $Quantity . "','" . $Images . "')";
 
-  @$db = new mysqli('localhost', 'root', '', 'esports_website');
+  @$db = new mysqli('localhost', 'root', '', 'jerseyshoredb');
 
   if (mysqli_connect_errno()) {
     echo "Error: Could not connect to database.  Please try again later.";

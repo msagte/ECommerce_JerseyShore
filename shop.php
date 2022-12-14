@@ -9,7 +9,7 @@ session_Start(); ?>
 			$host = "localhost"; /* Host name */
 			$user = "root"; /* User */
 			$password = ""; /* Password */
-			$dbname = "esports_website"; /* Database name */
+			$dbname = "jerseyshoredb"; /* Database name */
 			$con = mysqli_connect($host, $user, $password,$dbname);
 			$query = "SELECT * FROM category WHERE 1; " ;
             return $query_run = mysqli_query($con, $query);
