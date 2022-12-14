@@ -147,7 +147,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
               <div class="card-body">
             <?php
 
-      $res1 = "select DISTINCT CONCAT(b.Brand_Name , ' ' , p.Name , ' ' ,  Ct.Category_Name) as 'Name',P.Price,P.Images,OD.quantity,O.invoicenumber,O.orderdate  FROM orders O INNER JOIN orderdetail OD ON O.Order_ID = OD.Order_ID  INNER JOIN product P on P.Product_ID = OD.Product_ID  INNER JOIN brand B ON B.Brand_ID = P.brand_id   INNER JOIN category Ct on Ct.Category_ID = p.category_id WHERE O.cust_id=" . $_SESSION['CustID'] . " AND O.Order_ID = " . $_SESSION['OrderID'];
+      $res1 = "select DISTINCT CONCAT(b.Brand_Name , ' ' , p.Name ) as 'Name',Ct.Category_Name,P.Price,P.Images,OD.quantity,O.invoicenumber,O.orderdate  FROM orders O INNER JOIN orderdetail OD ON O.Order_ID = OD.Order_ID  INNER JOIN product P on P.Product_ID = OD.Product_ID  INNER JOIN brand B ON B.Brand_ID = P.brand_id   INNER JOIN category Ct on Ct.Category_ID = p.category_id WHERE O.cust_id=" . $_SESSION['CustID'] . " AND O.Order_ID = " . $_SESSION['OrderID'];
       $query_result = mysqli_query($con, $res1);
 
       $total_price = 0;
@@ -169,7 +169,9 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small"><?php echo $row['Name'] ?></p>
                   </div>
-                 
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small"><?php echo $row['Category_Name'] ?></p>
+                  </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small">Qty: <?php echo $row['quantity'] ?></p>
                   </div>
@@ -228,14 +230,17 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 
             <div class="d-flex justify-content-between mb-5">
               <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> $5.00</p>
+              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> $<?php if (!empty($total_price))
+        echo $total_price * 0.01;
+      else
+        echo 0; ?></p>
             </div>
           </div>
           <div class="card-footer border-0 px-4 py-5"
             style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
               paid: <span class="h2 mb-0 ms-2">$<?php if (!empty($total_price))
-        echo $total_price + 5;
+        echo $total_price + ($total_price * 0.01);
       else
         echo 0; ?></span></h5>
           </div>
