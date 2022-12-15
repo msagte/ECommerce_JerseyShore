@@ -177,7 +177,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                   <img src="pictures/<?php echo $product[6]; ?>"
                     class="w-100" alt=<?php echo $product[2] ." " . $product[1]; ?> />
                   <a href="#!">
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                    <div class="mask" style="background-color: a8729a"></div>
                   </a>
                 </div>
                 <!-- Image -->
@@ -258,6 +258,10 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <!-- Single item -->
           </div>
         </div>
+        
+        <?php
+        if (count(array_keys($_SESSION["shopping_cart"])) >0 ) {
+        ?>
         <div class="card mb-4">
           <div class="card-body">
             <p><strong>Expected shipping delivery</strong></p>
@@ -268,7 +272,9 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             </button>
 
           </div>
-        </div>       
+          </div>  
+          <?php } ?>
+             
       </div>
       <div class="col-md-4">
         <div class="card mb-4">
@@ -284,7 +290,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 Shipping
-                <span>$5.00</span>
+                <span>$<?php echo number_format($total_price * .01, 2, '.', '') ?></span>
               </li>
               <li
                 class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -294,14 +300,18 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
                     <p class="mb-0">(including Tax)</p>
                   </strong>
                 </div>
-                <span><strong>$<?php echo number_format($total_price + 5, 2, '.', ''); ?></strong></span>
+                <span><strong>$<?php echo number_format($total_price + ($total_price * .01), 2, '.', ''); ?></strong></span>
               </li>
             </ul>
+            <?php
+            if (count(array_keys($_SESSION["shopping_cart"])) > 0) {
+            ?>
             <div>
-            <a class="nav-link" href="Receipt.php?CustID=<?php echo $_GET['CustID']?>"><button type="button" class="btn btn-primary btn-lg btn-block">
+            <a class="nav-link" href="Receipt.php?CustID=<?php echo $_GET['CustID'] ?>"><button type="button" class="btn btn-primary btn-lg btn-block">
               Place Order
             </button></a>
             </div>
+            <?php } ?>
           </div>
         </div>
       </div>
