@@ -7,24 +7,33 @@ if (!isset($_SESSION["shopping_cart"])) {
 }
 $status="";
 if (isset($_POST['action']) && $_POST['action']=="remove"){
-if(!empty($_SESSION["shopping_cart"])) {
-	foreach($_SESSION["shopping_cart"] as $key => $value) {
-		if($_POST["Product_ID"] == $key){
-		unset($_SESSION["shopping_cart"][$key]);
-		$status = "<div class='box' style='color:red;'>
-		Product is removed from your cart!</div>";
-		}
-		if(empty($_SESSION["shopping_cart"]))
-		unset($_SESSION["shopping_cart"]);
-			}		
-		}
+
+  $sql_Delete_Cart="DELETE FROM cart WHERE cust_id =" . $_SESSION['CustID'];
+  if(mysqli_query($con, $sql_Delete_Cart))
+  {
+    $status = "<div class='box' style='color:red;'>
+		Cart  is emtpy!</div>";
+
+  }
+
+// if(!empty($_SESSION["shopping_cart"])) {
+// 	foreach($_SESSION["shopping_cart"] as $key => $value) {
+// 		if($_POST["Product_ID"] == $key){
+// 		unset($_SESSION["shopping_cart"][$key]);
+// 		$status = "<div class='box' style='color:red;'>
+// 		Product is removed from your cart!</div>";
+// 		}
+// 		if(empty($_SESSION["shopping_cart"]))
+// 		unset($_SESSION["shopping_cart"]);
+// 			}		
+// 		}
 }
 
 
 if (isset($_GET['CustID']) && $_GET['CustID'] != "") {
   $Cust_ID = $_GET['CustID'];
   //$Product_ID = $_REQUEST['Product_ID'];
-  $result = mysqli_query($con, "SELECT distinct P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id
+  $result = mysqli_query($con, "SELECT  P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id
       INNER JOIN Cart Ct on Ct.Product_Id = p.Product_ID  WHERE CT.cust_id ='$Cust_ID'");
        $cartArrays =  $result->fetch_all();
   while ($row = mysqli_fetch_assoc($result)) {
@@ -76,7 +85,6 @@ if (isset($_GET['CustID']) && $_GET['CustID'] != "") {
 
                    
     <style>
-
 .gradient-custom {
 /* fallback for old browsers */
 background: #6a11cb;
@@ -87,6 +95,10 @@ background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 11
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
+
+
+
+
     </style>
 
       
@@ -108,7 +120,7 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <div class="collapse navbar-collapse" id="navbarExample01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="customerhome.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="product.php?CustID=<?php echo $_GET['CustID']?>">Products</a>
@@ -164,6 +176,8 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
           <div class="card-body">
             <!-- Single item -->
             <?php
+
+    echo $status;
     $j = 0;
     $total_price = 0;
     $newCartArray = array();
@@ -174,13 +188,25 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
               <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                 <!-- Image -->
                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                  <img src="pictures/<?php echo $product[6]; ?>"
+                  <img src="pictures/<?php echo $product[6]; ?>" id="myImg" 
                     class="w-100" alt=<?php echo $product[2] ." " . $product[1]; ?> />
                   <a href="#!">
                     <div class="mask" style="background-color: a8729a"></div>
                   </a>
                 </div>
                 <!-- Image -->
+              </div>
+              <!-- The Modal -->
+              <div id="myModal" class="modal">
+
+              <!-- The Close Button -->
+              <span class="close">&times;</span>
+
+              <!-- Modal Content (The Image) -->
+              <img class="modal-content" id="img01">
+
+              <!-- Modal Caption (Image Text) -->
+              <div id="caption"></div>
               </div>
 
               <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
@@ -267,12 +293,26 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
             <p><strong>Expected shipping delivery</strong></p>
             <p class="mb-0"><script> var date = new Date(); date.setDate(date.getDate() + 2); document.write(date.toLocaleDateString());           
   </script></p>
-             <button type="submit" id="btnCalc" class="btn btn-primary btn-lg btn-block">
-              Calculate
-            </button>
+             
 
           </div>
+          
           </div>  
+          <div class="card mb-4">
+          <div class="card-body">
+
+          <button type="submit" id="btnCalc" class="btn btn-primary btn-lg btn-block">
+              Calculate
+            </button>
+          </div>
+          <div class="card-body">
+
+          <button type="submit" id="btnEmtpy" class="btn btn-primary btn-lg btn-block">
+              Empty Cart
+            </button>
+            <input type='hidden' name='action' value="remove" />
+            </div>
+          </div>
           <?php } ?>
              
       </div>
