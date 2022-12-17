@@ -26,8 +26,8 @@
 $con = mysqli_connect("localhost","root","","jerseyshoredb");
 
 // Get all the categories from category table
-$sql = "SELECT * FROM category";
-  $sqls = "SELECT * FROM brand";
+$sql = "SELECT * FROM category order by Category_ID asc";
+  $sqls = "SELECT * FROM brand order by Brand_ID";
 $all_categories = mysqli_query($con,$sql);
   $all_brands = mysqli_query($con, $sqls);
 
@@ -44,22 +44,37 @@ if(isset($_POST['submit']))
       // $Category = mysqli_real_escape_string($con,$_POST['Category']);
   // Store the Category ID in a "id" variable
   $category_id = mysqli_real_escape_string($con,$_POST['Category']);
-  
-  // Creating an insert query using SQL syntax and
-  // storing it in a variable.
-  $sql_insert =
-  "insert into product (Name,brand_id,Price,category_id,Quantity,Images) values
+
+  if (isset($_POST['updateProduct']) && !empty($_POST['updateProduct'])) {
+
+    
+    
+    $sql_update_product = "UPDATE Product SET Quantity='{$Quantity}',Name = '{$Name}',Price = '{$Price}',brand_id='{$brand_id}',category_id='{$category_id}' WHERE Product_ID ='{$_POST['updateProduct']}'";
+    if(mysqli_query($con, $sql_update_product))
+    {
+      echo '<script>alert("Product Updated successfully")
+      window.location.href="product_Management.php"
+      </script>';
+    }
+   
+  } else {
+
+     // Creating an insert query using SQL syntax and
+    // storing it in a variable.
+    $sql_insert =
+      "insert into product (Name,brand_id,Price,category_id,Quantity,Images) values
           ('" . $Name . "', '" . $brand_id . "', '" . $Price . "', '" . $category_id . "','" . $Quantity . "','" . $Images . "')";
 
-  
+          if(mysqli_query($con,$sql_insert))
+          {
+            echo '<script>alert("Product added successfully")</script>';
+          }
+  }
   // The following code attempts to execute the SQL query
   // if the query executes with no errors
   // a javascript alert message is displayed
   // which says the data is inserted successfully
-  if(mysqli_query($con,$sql_insert))
-  {
-    echo '<script>alert("Product added successfully")</script>';
-  }
+ 
 }
 ?>
 <section class="text-center">
@@ -82,13 +97,57 @@ if(isset($_POST['submit']))
         <div class="col-lg-8">
           <img src="pictures/Homelogo.png"
                     style="width: 185px;" alt="logo">
+
+        <?php  if (isset($_GET['ProductID']) && !empty($_GET['ProductID'])) { ?>
+          <h2 class="fw-bold mb-5">Update Product</h2>
+        <?php } else { ?>
           <h2 class="fw-bold mb-5">Insert Product</h2>
+          <?php } ?>
+<?php
+
+$ProductName = "";
+$brandId = 0;
+$categoryId= 0;
+$quantityNo =0;
+$priceAmt = 0;
+$imgFile = "";
+
+          if (isset($_GET['ProductID']) && !empty($_GET['ProductID']))
+          {
+            $prodSQL = "SELECT * FROM Product where Product_ID = " . $_GET['ProductID'];
+            $results = mysqli_query($con,$prodSQL);
+
+            if (!$results) {
+    echo 'Could not run query: ';
+              exit;
+          }
+          
+          $row = mysqli_fetch_array($results);
+          if(mysqli_num_rows($results) > 0)
+          {
+                   foreach($results as $result)
+           {
+            $ProductName = $result['Name'];
+            $brandId = $result['brand_id'];
+            $categoryId= $result['category_id'];
+            $quantityNo= $result['Quantity'];
+            $priceAmt= $result['Price'];
+            $imgFile = $result['Images'];
+            
+
+           }
+          }
+
+
+            
+          }
+?>
           
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row">
               <div class="col-md-12 mb-4">
                 <div class="form-outline">                 				
-                  <input type="text" id="Name" class="form-control" placeholder="Enter Product Name" name="Name" maxlength="60" size="300" required/>                    
+                  <input type="text" id="Name" class="form-control" placeholder="Enter Product Name" name="Name" maxlength="60" size="300" value ="<?php echo $ProductName; ?>" required/>                    
                 </div>
               </div>
 			  </div>
@@ -99,7 +158,6 @@ if(isset($_POST['submit']))
                 <div class="dropdown">
 					
 					<select class="form-select" aria-labelledby="dropdownMenu2" name="Category" required>
-						<option selected="">Select Category</option>
 						<?php
 				// use a while loop to fetch data
 				// from the $all_categories variable
@@ -107,7 +165,7 @@ if(isset($_POST['submit']))
 				while ($category = mysqli_fetch_array(
 						$all_categories,MYSQLI_ASSOC)):;
 			?>
-				<option value="<?php echo $category["Category_ID"];
+				<option <?=$categoryId == $category['Category_ID'] ? 'selected="selected"' : '';?> value="<?php echo $category["Category_ID"];
 					// The value we usually set is the primary key
 				?>">
 					<?php echo $category["Category_Name"];
@@ -127,7 +185,6 @@ if(isset($_POST['submit']))
             <div class="col-md-6 mb-4">
               <div class="form-outline">
               <select class="form-select" name="Brand">
-						<option selected="">Select Brand</option>
 						<?php
 				// use a while loop to fetch data
 				// from the $all_categories variable
@@ -135,7 +192,7 @@ if(isset($_POST['submit']))
 				while ($brand = mysqli_fetch_array(
 						$all_brands,MYSQLI_ASSOC)):;
 			?>
-				<option value="<?php echo $brand["Brand_ID"];
+				<option <?=$brandId == $brand['Brand_ID'] ? 'selected="selected"' : '';?> value="<?php echo $brand["Brand_ID"];
 					// The value we usually set is the primary key
 				?>">
 					<?php echo $brand["Brand_Name"];
@@ -153,32 +210,42 @@ if(isset($_POST['submit']))
 			
             <div class="col-md-6 mb-4">
               <div class="form-outline">
-              <input type="number" placeholder="Price" name="Price" maxlength="30" size="25"   class="form-control" id="Price" required />
+              <input type="number" placeholder="Price" name="Price" maxlength="30" size="25"   class="form-control" id="Price" value ="<?php echo $priceAmt; ?>" required />
             </div>
             </div>
           
 
             <div class="col-md-6 mb-4">
               <div class="form-outline">
-              <input type="number" placeholder="Quantity" name="Quantity" maxlength="30" size="25"  class="form-control" id="Quantity" required/>
+              <input type="number" placeholder="Quantity" name="Quantity" maxlength="30" size="25"  class="form-control" id="Quantity" value ="<?php echo $quantityNo; ?>" required/>
             </div>
             </div>
 			</div>
           <div class="row">
-		  <input type="file" name="Images" id="uploadimage" onchange="show_preview('preview1','uploadimage')" maxlength="100" size="130"/> 
-		  <img class="media-object" src="http://placehold.it/50x50" alt="" />
+		  <input type="file" name="Images" id="uploadimage" onchange="show_preview('preview1','uploadimage')" maxlength="100" value ="" size="130"/> 
+		  <img class="media-object" src="http://placehold.it/50x50" alt="" ><?php echo $imgFile; ?></img>
 		  </div>
           
         
-        
-		
+        <?php
+               if (isset($_GET['ProductID']) && !empty($_GET['ProductID'])) {?>
             <!-- Submit button -->
+            <button type="submit" id ="submit" name="submit" class="btn btn-primary btn-block mb-4">
+              Update Product
+            </button>
+            <button type="button" onclick="window.location='product_Management.php';" class="btn btn-primary btn-block mb-4">
+              Return
+            </button>
+            <input type = "Hidden" name="updateProduct" value = '<?php echo $_GET['ProductID']?>' />
+            <?php } else {   ?>
+
             <button type="submit" id ="submit" name="submit" class="btn btn-primary btn-block mb-4">
               Add Product
             </button>
-            <button type="button" onclick="window.location='CustomerLogin.php';" class="btn btn-primary btn-block mb-4">
+            <button type="button" onclick="window.location='customerLogin.php';" class="btn btn-primary btn-block mb-4">
               Return
             </button>
+              <?php } ?>
             <!-- Register buttons -->
             
           

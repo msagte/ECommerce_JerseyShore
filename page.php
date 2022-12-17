@@ -19,7 +19,7 @@ if(isset($_POST['but1_submit'])){
 
         if($count > 0){
             $_SESSION['uname'] = $uname;
-            header('Location: home.php');
+            header('Location: product_Management.php');
         }else{
             echo "Invalid username and password";
         }
