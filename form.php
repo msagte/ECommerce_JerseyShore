@@ -242,7 +242,7 @@ $imgFile = "";
             <button type="submit" id ="submit" name="submit" class="btn btn-primary btn-block mb-4">
               Add Product
             </button>
-            <button type="button" onclick="window.location='customerLogin.php';" class="btn btn-primary btn-block mb-4">
+            <button type="button" onclick="window.location='product_Management.php';" class="btn btn-primary btn-block mb-4">
               Return
             </button>
               <?php } ?>

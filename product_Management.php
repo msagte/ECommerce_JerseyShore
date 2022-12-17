@@ -18,9 +18,20 @@
 </head>
 
 <?php
-  // Connect to database
-  $con = mysqli_connect("localhost","root","","jerseyshoredb");
+ // Connect to database
+ $con = mysqli_connect("localhost","root","","jerseyshoredb");
 
+ $deleteVisible="";
+if (isset($_GET['Emp_ID']) && !empty($_GET['Emp_ID'])) {
+    $mgr_query = "select count(*) as cntmgr from employee WHERE Employee_ID ='{$_GET['Emp_ID']}' and Is_Manager=1 ";
+    $result = mysqli_query($con, $mgr_query);
+    $row = mysqli_fetch_array($result);
+    $countmgr = $row['cntmgr'];
+    if ($countmgr <= 0) {
+        $deleteVisible = "hidden";
+    }
+}
+ 
 if (isset($_POST['deleteProduct']) && !empty($_POST['deleteProduct'])) {
 
     $sql_query = "select count(*) as cntproduct from cart WHERE Product_ID ='{$_POST['deleteProduct']}'";
@@ -169,7 +180,7 @@ if (isset($_POST['deleteProduct']) && !empty($_POST['deleteProduct'])) {
                 </div>
                 <div>
                 <div>
-                <a class="nav-link" href="cartpage.php"><button type="button"  id="cartpage" href="cartpage.php"  class="btn btn-primary btn-lg btn-block">
+                <a class="nav-link" href="form.php"><button type="button"  id="cartpage" href="cartpage.php"  class="btn btn-primary btn-lg btn-block">
                 Add Product
                 </button></a>
                 </div>
@@ -261,7 +272,7 @@ if (!empty($_POST['categories'])) {
                             
                         </div> 
                         <button class="btn w-40 rounded my-2" type="button" onclick="window.location='form.php?ProductID=<?php echo $row['Product_ID'] ?>';" id="btnEditProduct" name="btnEdit">Edit Product</button>   
-                        <button class="btn w-40 rounded my-2" type="submit" onclick="return  confirm('do you want to delete the product?')" id="btnDelete" name="btnDelete">Delete Product</button>   
+                        <button class="btn w-40 rounded my-2" type="submit" <?php echo $deleteVisible ?> onclick="return  confirm('do you want to delete the product?')" id="btnDelete" name="btnDelete">Delete Product</button>   
                         <input type = "Hidden" name="deleteProduct" value = '<?php echo  $row['Product_ID']?>' />                                               
                     </div>
                 </div>

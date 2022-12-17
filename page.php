@@ -10,7 +10,7 @@ if(isset($_POST['but1_submit'])){
 
     if ($uname != "" && $password != ""){
 
-        $sql_query = "select count(*) as cntUser from Employee where Login_ID='".$uname."' and Password='".md5($password)."'";
+        $sql_query = "select count(*) as cntUser,Employee_ID from Employee where Login_ID='".$uname."' and Password='".md5($password)."' group by Employee_ID";
         //var_dump($sql_query); exit;
         $result = mysqli_query($con,$sql_query);
         $row = mysqli_fetch_array($result);
@@ -19,7 +19,8 @@ if(isset($_POST['but1_submit'])){
 
         if($count > 0){
             $_SESSION['uname'] = $uname;
-            header('Location: product_Management.php');
+            $_SESSION["Employee_ID"] = $row['Employee_ID'];
+            header('Location: product_Management.php?Emp_ID=' . $row['Employee_ID']);
         }else{
             echo "Invalid username and password";
         }
