@@ -13,6 +13,7 @@ if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
   //$Product_ID = $_REQUEST['Product_ID'];
   $result = mysqli_query($con, "SELECT distinct P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id
       INNER JOIN Cart Ct on Ct.Product_Id = p.Product_ID  WHERE CT.cust_id ='$Cust_ID'");
+
        $cartArrays =  $result->fetch_all();
   while ($row = mysqli_fetch_assoc($result)) {
     //$row = mysqli_fetch_assoc($result);
@@ -59,8 +60,17 @@ if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-                   
+<script type="text/javascript">
+ $('.input-daterange input').each(function() {
+    $(this).datepicker('clearDates');
+});
+ </script>
     <style>
 
 .gradient-custom {
@@ -377,6 +387,33 @@ $(document).ready(function(){
     
 <section class="h-100 gradient-custom">
 <form method="post" action="orderhistory.php">
+<div class="container py-5">
+
+<div class="card mb-4">
+	<div class="col-sm-12">
+	<div class="input-group input-daterange">
+    <input width="50%" type="date" class="form-control" id="fromDate" name="fromDate" value="<?php if (isset($_POST['fromDate'])) {
+	    echo $_POST['fromDate']; }
+		else 
+		{
+		echo "2022-12-12";
+    }  ?>">
+    <div class="input-group-addon">to</div>
+    <input type="date" class="form-control" id="toDate" name="toDate" value="<?php if (isset($_POST['toDate'])) {
+	    echo $_POST['toDate']; }
+		else 
+		{
+		echo "2022-12-12";
+    }  ?>">
+</div>
+<input type="hidden" id ="search" value ="search" />
+<button type="submit" id="btnSearch" class="btn btn-primary btn-lg btn-block float-end">
+Search
+</button>				
+</div>						
+</div>
+</div>
+</div>
   <div class="container py-5">
 	<div class="table-responsive">
 		<div class="table-wrapper">
@@ -386,10 +423,7 @@ $(document).ready(function(){
 						<h2>Manage <b>Orders</b></h2>
 					</div>
 					
-					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><span>Search</span></a>
-									
-					</div>
+					
 				</div>
 			</div>
       <table class="table table-striped table-hover">
@@ -408,11 +442,20 @@ $(document).ready(function(){
 <?php
 
 if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
+	$fromDate = '12-12-2022';
+	$toDate = '12-12-2022';
+
   $Cust_ID = $_SESSION['CustID'];
   //$Product_ID = $_REQUEST['Product_ID'];
   $orderSQL = "SELECT distinct  O.Order_ID,Sum(P.Price) 'Total Price', CONCAT(c.First_Name , ' ' ,c.Last_Name) 'Name', Sum(OD.Quantity) 'Total Items', o.orderdate FROM orders O INNER JOIN orderdetail OD on OD.Order_ID = O.Order_ID
   INNER JOIN product p ON p.Product_ID = od.Product_ID INNER JOIN customer c ON c.Cust_ID = O.Cust_ID
   WHERE C.Cust_ID=" . $Cust_ID;
+ if (isset($_POST['fromDate']) && $_POST['fromDate'] != "" && isset($_POST['toDate']) && $_POST['toDate'] != "")
+  {
+	$fromDate = $_POST['fromDate'] ;
+	$toDate = $_POST['toDate'];
+		$orderSQL = $orderSQL . " And orderdate between '" . $fromDate . "' and '" . $toDate . "' ";
+  }
   $orderSQL = $orderSQL . " GROUP by O.Order_ID,O.orderdate,C.First_Name,C.Last_Name";
 
   $query_result = mysqli_query($con, $orderSQL);
@@ -422,9 +465,7 @@ if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
   while ($row = mysqli_fetch_assoc($query_result)) {
 
 
-?>
-			
-				
+?>				
 					<tr>
 						
 						<td><?php echo $row['Order_ID'] ?></td>
@@ -451,100 +492,12 @@ if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
 		</div>
 	</div>        
 </div>
-<!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form>
-				<div class="modal-header">						
-					<h4 class="modal-title">Add Employee</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">					
-					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" required>
-					</div>					
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Add">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form>
-				<div class="modal-header">						
-					<h4 class="modal-title">Edit Employee</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">					
-					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" required>
-					</div>					
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Save">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form>
-				<div class="modal-header">						
-					<h4 class="modal-title">Delete Employee</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				
-			</form>
-		</div>
-	</div>
-
-  
-</div>
  
   </div>
   </form>
 </section>
     
 
-
-<a href="customerhome.php">Return</a>
 
 </body>
 </html>
