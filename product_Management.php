@@ -86,11 +86,15 @@ if (isset($_POST['deleteProduct']) && !empty($_POST['deleteProduct'])) {
                  
                     
                     </div>
+                    <?php if($deleteVisible=="hidden") { ?>
                     <div>
                     <a class="nav-link" href="page.php"> <img  src="pictures/logout.png" href="page.php" width='30' height='30' /></a>
                     </div>
-                  
-                   
+                    <?php } else { ?>
+                    <div>
+                    <a class="nav-link" href="ManagerView.php"> <img  src="pictures/logout.png" href="page.php" width='30' height='30' /></a>
+                    </div>
+                        <?php } ?>
                 </ul>
             
         </div>
