@@ -17,6 +17,7 @@ if (isset($_POST['Password']) && !empty($_POST['Password'])) {
   $lowercase = preg_match('@[a-z]@', $password);
   $number = preg_match('@[0-9]@', $password);
   $specialChars = preg_match('@[^\w]@', $password);
+  $manager = "";
 
   if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
     echo '<script>alert("Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.")
@@ -26,12 +27,15 @@ if (isset($_POST['Password']) && !empty($_POST['Password'])) {
   } 
 
   if ($validPwd) {
-    $encrypted_pwd = md5($pwd);
+    $encrypted_pwd = md5($password);
     $username = $_POST['Login_ID'];
     $fname = $_POST['First_Name'];
     $lname = $_POST['Last_Name'];
     $email = $_POST['Email'];
-    $manager = $_POST['manager'];
+    if (is_null($_POST['manager']))
+      $manager = 0;
+    else 
+      $manager = 1;
 
     $employee = $_POST['Employee_ID'];
 
@@ -55,7 +59,7 @@ if (isset($_POST['Password']) && !empty($_POST['Password'])) {
 
 
 
-    $insert = "INSERT into Employee ( First_Name, Last_Name, Employee_ID, Email, Login_ID , Password, Manager) 
+    $insert = "INSERT into Employee ( First_Name, Last_Name, Employee_ID, Email, Login_ID , Password, Is_Manager) 
  VALUES  ('$fname', '$lname', '$employee', '$email',   '$username', '$encrypted_pwd',$manager)";
     if ($conn->query($insert)) {
       echo 'You have entered an employee';
@@ -63,6 +67,9 @@ if (isset($_POST['Password']) && !empty($_POST['Password'])) {
       echo 'Error ' . $conn->error;
     }
 
+    echo '<script>alert("Employee Added Succesfully")
+    window.location.href="ManageEmployees.php"
+    </script>';
   }
 
 }
@@ -155,7 +162,7 @@ if (isset($_POST['Password']) && !empty($_POST['Password'])) {
           
             <!-- Checkbox -->
             <div class="form-check d-flex justify-content-center mb-4">
-              <input class="form-check-input me-2" type="checkbox" value="" id="manager" />
+              <input class="form-check-input me-2" type="checkbox" value="Y" name="manager" id="manager" />
               <label class="form-check-label" for="manager">
                 Manager ?
               </label>
