@@ -4,47 +4,15 @@ include("config.php");
 
 
 
-if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
-  $Cust_ID = $_SESSION['CustID'];
-  //$Product_ID = $_REQUEST['Product_ID'];
-  $result = mysqli_query($con, "SELECT distinct P.Product_ID,P.Name,B.Brand_Name,P.Price,C.Category_Name,P.Quantity,P.Images FROM product P INNER JOIN category C ON C.Category_ID = P.category_id INNER JOIN brand B ON B.Brand_ID = P.brand_id
-      INNER JOIN Cart Ct on Ct.Product_Id = p.Product_ID  WHERE CT.cust_id ='$Cust_ID'");
+if (isset($_GET['empID']) && $_GET['empID'] != "") {
 
-       $cartArrays =  $result->fetch_all();
-  while ($row = mysqli_fetch_assoc($result)) {
-    //$row = mysqli_fetch_assoc($result);
-    $Name = $row['Name'];
-    $Brand = $row['Brand_Name'];
-    $Price = $row['Price'];
-    $Product_ID = $row['Product_ID'];
-    $Images = $row['Images'];
+	$sql_delete_Emp = "DELETE FROM Employee WHERE Employee_ID ='{$_GET['empID']}'";
+	if (mysqli_query($con, $sql_delete_Emp)) {
+		echo '<script>alert("Employee Deleted successfully")
+  window.location.href="ManageEmployees.php"
+  </script>';
+	}
 
-
-   
-    $cartArray = array(
-      $Product_ID => array(
-        'Name' => $Name,
-        'Price' => $Price,
-        'Product_ID' => $Product_ID,
-        'Images' => $Images
-      )
-    );
-   // $cartArrays = $cartArray;
-  }
-  $_SESSION["shopping_cart"] = $cartArrays;
-  if (isset($_POST['action']) && $_POST['action'] == "change") {
-    $ids= $_POST['Product_ID'];
-    $quants = $_POST["quantity"];
-    $k=0;
-    foreach ($_SESSION["shopping_cart"] as &$value) {
-      if ($value[0] === $ids[$k]) {
-        $value['quantity'] = $quants[$k];
-        break; // Stop the loop after we've found the product
-      }
-      $k += 1;
-    }
-
-  }
 }
 ?>
 <html>
@@ -375,7 +343,7 @@ $(document).ready(function(){
     
     
 <section class="h-100 gradient-custom">
-<form method="post" action="orderhistory.php">
+<form method="post" action="ManageEmployees.php">
 
   <div class="container py-5">
 	<div class="table-responsive">
@@ -422,12 +390,13 @@ $(document).ready(function(){
 						
 						<td><?php echo $row['employee_id'] ?></td>
 						<td><?php echo $row['Full Name'] ?></td>
-            <td><?php echo $row['email'] ?></td>
-            <td><?php echo $row['Login_ID'] ?></td>
-            <td><?php echo $row['Manager'];?></td>						
+           				 <td><?php echo $row['email'] ?></td>
+            				<td><?php echo $row['Login_ID'] ?></td>
+            			<td><?php echo $row['Manager'];?></td>						
 						<td>
+							<input type="hidden" name="empID[]" value ='<?php echo $row['employee_id'] ?>' />
 						<a href="page.php" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>		
-						<a href="ManageEmployees.php" class="delete" onclick="return  confirm('do you want to delete the Employee?')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>			
+						<a href="ManageEmployees.php?empID=<?php echo $row['employee_id'] ?>"  class="delete" onclick="return  confirm('do you want to delete the Employee?')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>			
 						</td>
 					</tr>
 					
