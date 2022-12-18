@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2022 at 11:06 PM
+-- Generation Time: Dec 18, 2022 at 11:36 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -130,7 +130,8 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`Cust_ID`, `First_Name`, `Last_Name`, `Email`, `Address`, `Phone_Number`, `Login_ID`, `Password`) VALUES
 (1, 'yamini', 'chitikela', 'yaminichitikela@gmail.com', '13frank', 551358542, 'yamini', 'e10adc3949ba59abbe56e057f20f883e'),
 (2, 'Makarand', 'Agte', 'mack@email.com', '333 main str jersey nj 90909', 2147483647, 'mack', 'cfeb114b3fc6c4c1e23af6be9cc183e3'),
-(3, 'Lioenl', 'Messi', 'leo@mail.com', 'Right Now I am in Qatar', 2147483647, 'Leo', '657b298b04e033810343842f993c9817');
+(3, 'Lioenl', 'Messi', 'leo@mail.com', 'Right Now I am in Qatar', 2147483647, 'Leo', '657b298b04e033810343842f993c9817'),
+(4, 'Leonel', 'Messi', 'Leo@email.com', '123 Main Street City NJ', 234234234, 'Leo', '63d644a2ec245b11d89aea8a9f3e639b');
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE `employee` (
 INSERT INTO `employee` (`Employee_ID`, `First_Name`, `Last_Name`, `Email`, `Login_ID`, `Password`, `Is_Manager`) VALUES
 (0, 'Boris', 'Baker', 'boris@email.com', 'boris', '5f9f92b2843ab251a922cc23abf2322c', 1),
 (5345, 'Leonelo', 'Messi', 'Leonel@gmail.com', 'Leonelo', '35040ae7b9119a3489875c4b50aefebd', 1),
-(12344, 'rajas', 'agte', 'rajas@gmail.com', 'rajas', 'c660c5d6707ab50e5e2474b9d50752de', 0),
+(12344, 'rajas', 'agte', 'rajas@gmail.com', 'rajas', 'c660c5d6707ab50e5e2474b9d50752de', 1),
 (45432, 'Boris', 'Baker', 'boris@email.com', 'boris', '38788705bb36bb9049b407c1a32cb1f9', 1),
 (63453, 'Vincent', 'Dcosta', 'vincent@mail.com', 'vincent', '9d8a347763a92d7544b32716916b1fa3', 0),
 (66443, 'Makarand', 'Agte', 'Makarand@mail.com', 'Maks', '582be429b30a291e748cb7f7c62b78ac', 1),
@@ -367,7 +368,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orderdetail`
