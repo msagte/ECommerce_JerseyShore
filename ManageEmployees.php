@@ -395,7 +395,7 @@ $(document).ready(function(){
             			<td><?php echo $row['Manager'];?></td>						
 						<td>
 							<input type="hidden" name="empID[]" value ='<?php echo $row['employee_id'] ?>' />
-						<a href="page.php" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>		
+						<a href="employee_adding.php?empID=<?php echo $row['employee_id'] ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>		
 						<a href="ManageEmployees.php?empID=<?php echo $row['employee_id'] ?>"  class="delete" onclick="return  confirm('do you want to delete the Employee?')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>			
 						</td>
 					</tr>
