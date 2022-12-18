@@ -19,7 +19,7 @@ if(isset($_POST['but1_submit'])){
             $_SESSION['uname'] = $uname;
             $_SESSION['EmpName'] = $row['Name'];
             $_SESSION["Emp_ID"] = $row['Employee_ID'];
-            header('Location: managerhome.php');
+            header('Location: product_Management.php');
         }else{
             echo "Invalid username and password";
         }
