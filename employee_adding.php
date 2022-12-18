@@ -1,3 +1,73 @@
+<?php
+$hostName= 'localhost';
+$authName= 'root';
+$pass='';
+$dbname= 'jerseyshoredb';
+
+$conn=new mysqli($hostName,$authName,$pass,$dbname);
+require('include/function.php');
+
+if (isset($_POST['Password']) && !empty($_POST['Password'])) {
+
+  $password = $_POST['Password'];
+  $validPwd = true;
+
+  // Validate password strength
+  $uppercase = preg_match('@[A-Z]@', $password);
+  $lowercase = preg_match('@[a-z]@', $password);
+  $number = preg_match('@[0-9]@', $password);
+  $specialChars = preg_match('@[^\w]@', $password);
+
+  if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+    echo '<script>alert("Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.")
+    window.location.href="employee_adding.php"
+    </script>';
+    $validPwd = false;
+  } 
+
+  if ($validPwd) {
+    $encrypted_pwd = md5($pwd);
+    $username = $_POST['Login_ID'];
+    $fname = $_POST['First_Name'];
+    $lname = $_POST['Last_Name'];
+    $email = $_POST['Email'];
+    $manager = $_POST['manager'];
+
+    $employee = $_POST['Employee_ID'];
+
+    if (!stripslashes_deep($lname)) {
+
+      $lname = addslashes($lname);
+    }
+    if (!stripslashes_deep($fname)) {
+      $fname = addslashes($fname);
+    }
+    if (!stripslashes_deep($email)) {
+      $email = addslashes($email);
+    }
+    if (!stripslashes_deep($email)) {
+      $username = addslashes($username);
+    }
+
+    if (!stripslashes_deep($manager)) {
+      $manager = addslashes($manager);
+    }
+
+
+
+    $insert = "INSERT into Employee ( First_Name, Last_Name, Employee_ID, Email, Login_ID , Password, Manager) 
+ VALUES  ('$fname', '$lname', '$employee', '$email',   '$username', '$encrypted_pwd',$manager)";
+    if ($conn->query($insert)) {
+      echo 'You have entered an employee';
+    } else {
+      echo 'Error ' . $conn->error;
+    }
+
+  }
+
+}
+
+?>
 <html>
 <head>
   <title>Jersey Shore Furniture - Add Employee</title>
@@ -15,7 +85,7 @@
 
 <body>
   <!-- Section: Design Block -->
-  <form class="modal-content" action="signup3.php" method="post">
+  <form class="modal-content" action="employee_adding.php" method="post">
 <section class="text-center">
   <!-- Background image -->
   
@@ -85,15 +155,15 @@
           
             <!-- Checkbox -->
             <div class="form-check d-flex justify-content-center mb-4">
-              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-              <label class="form-check-label" for="form2Example33">
-                Subscribe to our newsletter
+              <input class="form-check-input me-2" type="checkbox" value="" id="manager" />
+              <label class="form-check-label" for="manager">
+                Manager ?
               </label>
             </div>
 
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary btn-block mb-4">
-              Sign up
+              Add Employee
             </button>
             <button type="button" onclick="window.location='ManageEmployees.php';" class="btn btn-primary btn-block mb-4">
               Return

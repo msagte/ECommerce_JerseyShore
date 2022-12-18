@@ -56,7 +56,9 @@ if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -335,7 +337,7 @@ $(document).ready(function(){
 
       
 </head>
-    <title>Jersey Shore Furniture Order History</title>
+    <title>Jersey Shore Furniture Employee Management</title>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div>
     <a class="nav-link"> <img  src="pictures/HomeLogo.png" width='200' height='100' /></a>
@@ -374,22 +376,19 @@ $(document).ready(function(){
     
 <section class="h-100 gradient-custom">
 <form method="post" action="orderhistory.php">
-<div class="container py-5">
 
-			
-</div>						
-</div>
-</div>
-</div>
   <div class="container py-5">
 	<div class="table-responsive">
 		<div class="table-wrapper">
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Manage <b>Orders</b></h2>
+						<h2>Manage <b>Employees</b></h2>
 					</div>
-					
+					<div class="col-sm-6">
+						<a href="employee_adding.php" class="btn btn-success"  data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+												
+					</div>
 					
 				</div>
 			</div>
@@ -397,35 +396,21 @@ $(document).ready(function(){
 				<thead>
 					<tr>
 					
-						<th>Order #</th>
+						<th>Emp #</th>
 						<th>Name</th>
-						<th>Date</th>
-            <th>Total Items</th>
-						<th>Total Price</th>
+						<th>Email</th>
+            			<th>Login_ID</th>
+						<th>Manager?</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
         <tbody>
 <?php
 
-if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
-	$fromDate = '12-12-2022';
-	$toDate = '12-12-2022';
-
-  $Cust_ID = $_SESSION['CustID'];
   //$Product_ID = $_REQUEST['Product_ID'];
-  $orderSQL = "SELECT distinct  O.Order_ID,Sum(P.Price) 'Total Price', CONCAT(c.First_Name , ' ' ,c.Last_Name) 'Name', Sum(OD.Quantity) 'Total Items', o.orderdate FROM orders O INNER JOIN orderdetail OD on OD.Order_ID = O.Order_ID
-  INNER JOIN product p ON p.Product_ID = od.Product_ID INNER JOIN customer c ON c.Cust_ID = O.Cust_ID
-  WHERE C.Cust_ID=" . $Cust_ID;
- if (isset($_POST['fromDate']) && $_POST['fromDate'] != "" && isset($_POST['toDate']) && $_POST['toDate'] != "")
-  {
-	$fromDate = $_POST['fromDate'] ;
-	$toDate = $_POST['toDate'];
-		$orderSQL = $orderSQL . " And orderdate between '" . $fromDate . "' and '" . $toDate . "' ";
-  }
-  $orderSQL = $orderSQL . " GROUP by O.Order_ID,O.orderdate,C.First_Name,C.Last_Name";
-
-  $query_result = mysqli_query($con, $orderSQL);
+	$employeeSQL = "select employee_id,Concat(FIRST_name,' ',Last_name) 'Full Name',email,Login_ID,(CASE WHEN Is_Manager =1  THEN 'Yes' ELSE 'No' end) AS 'Manager' from employee";
+ 
+  $query_result = mysqli_query($con, $employeeSQL);
   $total_rows = mysqli_num_rows($query_result);
 
 
@@ -435,20 +420,21 @@ if (isset($_SESSION['CustID']) && $_SESSION['CustID'] != "") {
 ?>				
 					<tr>
 						
-						<td><?php echo $row['Order_ID'] ?></td>
-						<td><?php echo $row['Name'] ?></td>
-            <td><?php echo $row['orderdate'] ?></td>
-            <td><?php echo $row['Total Items'] ?></td>
-            <td>$<?php echo  number_format($row['Total Price'], 2, '.', '');?></td>						
+						<td><?php echo $row['employee_id'] ?></td>
+						<td><?php echo $row['Full Name'] ?></td>
+            <td><?php echo $row['email'] ?></td>
+            <td><?php echo $row['Login_ID'] ?></td>
+            <td><?php echo $row['Manager'];?></td>						
 						<td>
-							<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>							
+						<a href="page.php" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>		
+						<a href="ManageEmployees.php" class="delete" onclick="return  confirm('do you want to delete the Employee?')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>			
 						</td>
 					</tr>
 					
 				
       <?php
   }
-}
+
       ?>
       </tbody>
 			</table>
