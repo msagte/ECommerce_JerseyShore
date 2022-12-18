@@ -1,4 +1,6 @@
-
+<?php
+include "config.php";
+?>
 
 <html>
 <head>
@@ -19,11 +21,11 @@
 
 <?php
  // Connect to database
- $con = mysqli_connect("localhost","root","","jerseyshoredb");
-
+ $con = mysqli_connect("localhost","root","","jerseyshoredb"); 
+ 
  $deleteVisible="";
-if (isset($_GET['Emp_ID']) && !empty($_GET['Emp_ID'])) {
-    $mgr_query = "select count(*) as cntmgr from employee WHERE Employee_ID ='{$_GET['Emp_ID']}' and Is_Manager=1 ";
+if (isset($_SESSION['Emp_ID']) && !empty($_SESSION['Emp_ID'])) {
+    $mgr_query = "select count(*) as cntmgr from employee WHERE Employee_ID ='{$_SESSION['Emp_ID']}' and Is_Manager=1 ";
     $result = mysqli_query($con, $mgr_query);
     $row = mysqli_fetch_array($result);
     $countmgr = $row['cntmgr'];
@@ -71,10 +73,14 @@ if (isset($_POST['deleteProduct']) && !empty($_POST['deleteProduct'])) {
     <div class="container-fluid"></div>
     
         <div class="container-fluid">
+       
             <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
             aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
+            <a  class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+                Welcome, <?php echo $_SESSION['EmpName'] ?> 
+            </a>
             <div class="collapse navbar-collapse" id="navbarExample01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                  

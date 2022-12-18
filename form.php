@@ -46,8 +46,6 @@ if(isset($_POST['submit']))
   $category_id = mysqli_real_escape_string($con,$_POST['Category']);
 
   if (isset($_POST['updateProduct']) && !empty($_POST['updateProduct'])) {
-
-    
     
     $sql_update_product = "UPDATE Product SET Quantity='{$Quantity}',Name = '{$Name}',Price = '{$Price}',brand_id='{$brand_id}',category_id='{$category_id}' WHERE Product_ID ='{$_POST['updateProduct']}'";
     if(mysqli_query($con, $sql_update_product))
