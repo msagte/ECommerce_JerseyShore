@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2022 at 10:50 PM
+-- Generation Time: Dec 18, 2022 at 11:06 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -56,6 +56,7 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`Brand_ID`, `Brand_Name`) VALUES
+(0, 'Select Brand'),
 (1, 'Ashley'),
 (2, 'Ethan Allen'),
 (3, 'Crate & Barrel'),
@@ -74,6 +75,14 @@ CREATE TABLE `cart` (
   `Product_Id` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `cust_id`, `Product_Id`) VALUES
+(46, 2, 10),
+(47, 2, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +99,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
+(0, 'Select Category'),
 (1, 'Bedroom Furniture'),
 (2, 'Dinning Room'),
 (3, 'Patio'),
@@ -119,7 +129,8 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`Cust_ID`, `First_Name`, `Last_Name`, `Email`, `Address`, `Phone_Number`, `Login_ID`, `Password`) VALUES
 (1, 'yamini', 'chitikela', 'yaminichitikela@gmail.com', '13frank', 551358542, 'yamini', 'e10adc3949ba59abbe56e057f20f883e'),
-(2, 'Makarand', 'Agte', 'mack@email.com', '333 main str jersey nj 90909', 2147483647, 'mack', 'cfeb114b3fc6c4c1e23af6be9cc183e3');
+(2, 'Makarand', 'Agte', 'mack@email.com', '333 main str jersey nj 90909', 2147483647, 'mack', 'cfeb114b3fc6c4c1e23af6be9cc183e3'),
+(3, 'Lioenl', 'Messi', 'leo@mail.com', 'Right Now I am in Qatar', 2147483647, 'Leo', '657b298b04e033810343842f993c9817');
 
 -- --------------------------------------------------------
 
@@ -142,7 +153,15 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`Employee_ID`, `First_Name`, `Last_Name`, `Email`, `Login_ID`, `Password`, `Is_Manager`) VALUES
-(123434, 'Makarand', 'Agte', 'mack@mail.com', 'mack', 'cfeb114b3fc6c4c1e23af6be9cc183e3', 0);
+(0, 'Boris', 'Baker', 'boris@email.com', 'boris', '5f9f92b2843ab251a922cc23abf2322c', 1),
+(5345, 'Leonelo', 'Messi', 'Leonel@gmail.com', 'Leonelo', '35040ae7b9119a3489875c4b50aefebd', 1),
+(12344, 'rajas', 'agte', 'rajas@gmail.com', 'rajas', 'c660c5d6707ab50e5e2474b9d50752de', 0),
+(45432, 'Boris', 'Baker', 'boris@email.com', 'boris', '38788705bb36bb9049b407c1a32cb1f9', 1),
+(63453, 'Vincent', 'Dcosta', 'vincent@mail.com', 'vincent', '9d8a347763a92d7544b32716916b1fa3', 0),
+(66443, 'Makarand', 'Agte', 'Makarand@mail.com', 'Maks', '582be429b30a291e748cb7f7c62b78ac', 1),
+(234234, 'Kylon', 'Mbappe', 'kylon@gmail.com', 'kylon', 'd41d8cd98f00b204e9800998ecf8427e', 0),
+(346345, 'Ddiar', 'Drogba', 'Ddiar@gmail.com', 'Ddiar', '1ef468100ad4ad900c39d637dda3274b', 1),
+(35234523, 'Madhavi', 'Agte', 'madhavi@amil.com', 'madhavi', 'beae889cf4dddd2cbf3d6be36a5f2579', 0);
 
 -- --------------------------------------------------------
 
@@ -174,7 +193,20 @@ INSERT INTO `orderdetail` (`Order_Detail_ID`, `Order_ID`, `Product_ID`, `quantit
 (57, 24, 1, 1, '250'),
 (58, 24, 8, 1, '234'),
 (59, 24, 10, 1, '1200'),
-(60, 24, 9, 2, '2300');
+(60, 24, 9, 2, '2300'),
+(61, 25, 4, 1, '900'),
+(62, 25, 8, 1, '234'),
+(64, 26, 1, 2, '250'),
+(65, 27, 8, 1, '234'),
+(66, 27, 10, 1, '1200'),
+(67, 28, 9, 1, '2300'),
+(68, 29, 8, 5, '234'),
+(69, 30, 10, 1, '1200'),
+(70, 31, 4, 2, '900'),
+(71, 32, 8, 0, '234'),
+(72, 33, 10, 1, '1200'),
+(74, 34, 1, 1, '250'),
+(75, 35, 8, 1, '234');
 
 -- --------------------------------------------------------
 
@@ -197,7 +229,18 @@ INSERT INTO `orders` (`Order_ID`, `Cust_ID`, `orderdate`, `invoicenumber`) VALUE
 (21, 2, '2022-12-14', 81047),
 (22, 2, '2022-12-14', 26751),
 (23, 2, '2022-12-14', 57947),
-(24, 2, '2022-12-14', 53638);
+(24, 2, '2022-12-14', 53638),
+(25, 3, '2022-12-14', 27512),
+(26, 2, '2022-12-15', 98012),
+(27, 2, '2022-12-15', 46868),
+(28, 2, '2022-12-15', 38990),
+(29, 2, '2022-12-15', 43328),
+(30, 2, '2022-12-15', 71333),
+(31, 2, '2022-12-15', 86551),
+(32, 2, '2022-12-15', 85354),
+(33, 2, '2022-12-15', 54770),
+(34, 2, '2022-12-15', 27451),
+(35, 2, '2022-12-17', 52056);
 
 -- --------------------------------------------------------
 
@@ -220,12 +263,11 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Product_ID`, `Name`, `brand_id`, `Price`, `category_id`, `Quantity`, `Images`) VALUES
-(1, 'Coffee Table', 4, '250', 2, 164, 'COFFEE TABEL 2.png'),
-(4, 'Hammock', 3, '900', 3, 80, 'HAMMOCK 1.png'),
-(8, 'mackarand', 1, '234', 1, 6, 'DINNIG CHAIR 2.png'),
-(9, 'King Size Bed', 1, '2300', 1, 98, 'BED 1.png'),
-(10, 'Dining Table with Chair', 2, '1200', 2, 99, 'DINNIG CHAIR 1.png'),
-(11, 'Outdoor patio Sofa', 5, '490', 3, 100, 'OUTDOOR CHAIR 1.png');
+(1, 'Coffee Table', 4, '250', 2, 161, 'COFFEE TABEL 2.png'),
+(4, 'Hammock', 4, '900', 3, 123, 'HAMMOCK 2.png'),
+(8, 'mackarand', 1, '234', 1, -2, 'DINNIG CHAIR 2.png'),
+(9, 'King Size Bed', 1, '2300', 1, 97, 'BED 1.png'),
+(10, 'Dining Table with Chair', 2, '1200', 2, 122, 'DINNIG CHAIR 1.png');
 
 --
 -- Indexes for dumped tables
@@ -307,43 +349,43 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Brand_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Cust_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `Order_Detail_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `Order_Detail_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Order_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Order_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Product_ID` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -361,7 +403,7 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `orderdetail`
   ADD CONSTRAINT `order_ID_FK` FOREIGN KEY (`Order_ID`) REFERENCES `orders` (`Order_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `product_ID_FK` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `product_ID_FK` FOREIGN KEY (`Product_ID`) REFERENCES `product` (`Product_ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `orders`
