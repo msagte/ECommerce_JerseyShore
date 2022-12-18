@@ -191,7 +191,7 @@ if (isset($_POST['deleteProduct']) && !empty($_POST['deleteProduct'])) {
                 </div>
                 <div>
                 <div>
-                <a class="nav-link" href="form.php"><button type="button"  id="cartpage" href="cartpage.php"  class="btn btn-primary btn-lg btn-block">
+                <a class="nav-link" href="form.php"><button type="button" <?php echo $deleteVisible ?>  id="cartpage" href="cartpage.php"  class="btn btn-primary btn-lg btn-block">
                 Add Product
                 </button></a>
                 </div>

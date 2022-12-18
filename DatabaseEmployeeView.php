@@ -18,7 +18,8 @@ if(isset($_POST['but1_submit'])){
 
         if($count > 0){
             $_SESSION['uname'] = $uname;
-            header('Location: DatabaseEmployeehome.php');
+             $_SESSION['EmpName'] = "Admin";
+            header('Location: ManageEmployees.php');
         }else{
             echo "Invalid username and password";
         }

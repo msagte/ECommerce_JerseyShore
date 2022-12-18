@@ -121,6 +121,9 @@ if (isset($_GET['empID']) && !empty($_GET['empID'])) {
     if ($row['Is_Manager'] == 1) {
       $checked = "checked";
     }
+    else{
+      $checked = "";
+    }
 
   }
 

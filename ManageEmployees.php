@@ -330,7 +330,11 @@ $(document).ready(function(){
                    
                     </div>
                     <div>
-                    <a class="nav-link" href="customerlogin.php"> <img  src="pictures/logout.png" href="customerlogin.php" width='30' height='30' /></a>
+						<?php if($_SESSION['EmpName'] != "Admin") { ?>
+                    <a class="nav-link" href="customerlogin.php"> <img  src="pictures/logout.png" href="ManagerView.php" width='30' height='30' /></a>
+					<?php } else { ?>
+						<a class="nav-link" href="DatabaseEmployeeView.php"> <img  src="pictures/logout.png" href="DatabaseEmployeeView.php" width='30' height='30' /></a>
+						<?php } ?>
                     </div>
                     
                    
@@ -353,10 +357,12 @@ $(document).ready(function(){
 					<div class="col-sm-6">
 						<h2>Manage <b>Employees</b></h2>
 					</div>
+					<?php if ($_SESSION['EmpName']=='Admin') { ?>	
 					<div class="col-sm-6">
 						<a href="employee_adding.php" class="btn btn-success"  data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
 												
 					</div>
+					<?php } ?>
 					
 				</div>
 			</div>
@@ -395,9 +401,11 @@ $(document).ready(function(){
             			<td><?php echo $row['Manager'];?></td>						
 						<td>
 							<input type="hidden" name="empID[]" value ='<?php echo $row['employee_id'] ?>' />
-						<a href="employee_adding.php?empID=<?php echo $row['employee_id'] ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>		
+						<a href="employee_adding.php?empID=<?php echo $row['employee_id'] ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>	
+						<?php if ($_SESSION['EmpName']=='Admin') { ?>	
 						<a href="ManageEmployees.php?empID=<?php echo $row['employee_id'] ?>"  class="delete" onclick="return  confirm('do you want to delete the Employee?')" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>			
-						</td>
+						<?php } ?>
+					</td>
 					</tr>
 					
 				
