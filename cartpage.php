@@ -366,9 +366,9 @@ background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 
 <div class="message_box" style="margin:10px 0px;">
 <?php echo $status;
 $host = "localhost"; /* Host name */
-$user = "root"; /* User */
-$password = ""; /* Password */
-$dbname = "jerseyshoredb"; /* Database name */
+$user = "agtem1_mack"; /* User */
+$password = "jerseyshoredb12"; /* Password */
+$dbname = "agtem1_jerseyshoredb"; /* Database name */
 $con = mysqli_connect($host, $user, $password,$dbname);
 mysqli_close($con);?></div>
 

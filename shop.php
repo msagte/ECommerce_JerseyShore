@@ -7,9 +7,9 @@ session_Start(); ?>
 			<h1>Our Products</h1>
 			<?php 
 			$host = "localhost"; /* Host name */
-			$user = "root"; /* User */
-			$password = ""; /* Password */
-			$dbname = "jerseyshoredb"; /* Database name */
+			$user = "agtem1_mack"; /* User */
+			$password = "jerseyshoredb12"; /* Password */
+			$dbname = "agtem1_jerseyshoredb"; /* Database name */
 			$con = mysqli_connect($host, $user, $password,$dbname);
 			$query = "SELECT * FROM category WHERE 1; " ;
             return $query_run = mysqli_query($con, $query);

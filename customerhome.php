@@ -1,7 +1,7 @@
 <?php
 session_start();
 $host = "localhost"; 
-$user = "root";
+$user = "agtem1_mack";
 $pass = "";
 $db = "jerseyshoredb";
 
